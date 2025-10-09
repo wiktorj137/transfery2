@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Flatpickr from 'react-flatpickr';
-import { Calendar, Users, ArrowRight, ArrowLeft, Car, Sparkles, Crown, Tag, Check, CreditCard, Banknote } from 'lucide-react';
+import { Calendar, Users, ArrowRight, ArrowLeft, Car, Sparkles, Crown, Tag, Check, CreditCard, Banknote, X } from 'lucide-react';
 import LocationAutocomplete from './LocationAutocomplete';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Polish } from 'flatpickr/dist/l10n/pl';
@@ -43,7 +43,11 @@ type Step3Data = z.infer<typeof step3Schema>;
 
 const STORAGE_KEY = 'transfer_booking_data';
 
-export default function TransferBookingForm() {
+interface TransferBookingFormProps {
+  defaultDestination?: string;
+}
+
+export default function TransferBookingForm({ defaultDestination }: TransferBookingFormProps = {}) {
   const [currentStep, setCurrentStep] = useState(1);
   const [pickupCoords, setPickupCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [dropoffCoords, setDropoffCoords] = useState<{ lat: number; lng: number } | null>(null);
@@ -134,7 +138,7 @@ export default function TransferBookingForm() {
         const data = JSON.parse(saved);
         if (data.step1) {
           step1Form.setValue('pickup', data.step1.pickup || '');
-          step1Form.setValue('dropoff', data.step1.dropoff || '');
+          step1Form.setValue('dropoff', data.step1.dropoff || defaultDestination || '');
           if (data.step1.date) step1Form.setValue('date', new Date(data.step1.date));
           step1Form.setValue('passengers', data.step1.passengers || 1);
           if (data.step1.pickupCoords) setPickupCoords(data.step1.pickupCoords);
@@ -152,9 +156,26 @@ export default function TransferBookingForm() {
       } catch (e) {
         console.error('Błąd wczytywania danych:', e);
       }
+    } else if (defaultDestination) {
+      // Ustaw domyślną destynację, jeśli nie ma zapisanych danych
+      step1Form.setValue('dropoff', defaultDestination);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Blokuj scroll body gdy modal jest otwarty (krok 2 lub 3)
+  useEffect(() => {
+    if (currentStep === 2 || currentStep === 3) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    // Cleanup przy unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [currentStep]);
 
   // Zapisz dane do localStorage
   const saveToLocalStorage = () => {
@@ -267,31 +288,28 @@ export default function TransferBookingForm() {
   });
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-8">
-      {/* Progress bar */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-700">Krok {currentStep} z 3</span>
-          <span className="text-sm text-gray-500">
-            {currentStep === 1 && 'Szczegóły transferu'}
-            {currentStep === 2 && 'Wybór pojazdu'}
-            {currentStep === 3 && 'Dane i płatność'}
-          </span>
-        </div>
-        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-blue-600 transition-all duration-300"
-            style={{ width: `${(currentStep / 3) * 100}%` }}
-          />
-        </div>
-      </div>
-
-      {/* KROK 1: Lokalizacje, data, pasażerowie */}
+    <>
+      {/* KROK 1 - Normalny formularz */}
       {currentStep === 1 && (
-        <form onSubmit={handleStep1Submit} className="space-y-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-            Szczegóły transferu
-          </h2>
+        <div className="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+          {/* Progress bar */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-gray-700">Krok 1 z 3</span>
+              <span className="text-sm text-gray-500">Szczegóły transferu</span>
+            </div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-blue-600 transition-all duration-300"
+                style={{ width: '33.33%' }}
+              />
+            </div>
+          </div>
+
+          <form onSubmit={handleStep1Submit} className="space-y-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              Szczegóły transferu
+            </h2>
 
           {/* Lokalizacje */}
           <div className="grid md:grid-cols-2 gap-4">
@@ -394,14 +412,54 @@ export default function TransferBookingForm() {
             <ArrowRight className="w-5 h-5" />
           </button>
         </form>
+        </div>
       )}
 
-      {/* KROK 2: Promo code + wybór pojazdu */}
-      {currentStep === 2 && (
-        <form onSubmit={handleStep2Submit} className="space-y-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-            Wybierz pojazd
-          </h2>
+      {/* KROK 2 i 3 - Fullscreen Modal */}
+      {(currentStep === 2 || currentStep === 3) && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center overflow-y-auto animate-fadeIn">
+          <div className="min-h-screen w-full bg-white md:m-4 md:rounded-2xl md:shadow-2xl md:max-w-6xl animate-slideUp">
+            {/* Close button */}
+            <div className="sticky top-0 bg-white z-10 border-b border-gray-200 px-4 md:px-8 py-4 flex items-center justify-between md:rounded-t-2xl">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900">
+                {currentStep === 2 ? 'Wybierz pojazd' : 'Dane i płatność'}
+              </h2>
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentStep(1);
+                  saveToLocalStorage();
+                }}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-6 h-6 text-gray-600" />
+              </button>
+            </div>
+
+            {/* Progress bar */}
+            <div className="px-4 md:px-8 py-4 border-b border-gray-200">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700">Krok {currentStep} z 3</span>
+                <span className="text-sm text-gray-500">
+                  {currentStep === 2 && 'Wybór pojazdu'}
+                  {currentStep === 3 && 'Dane i płatność'}
+                </span>
+              </div>
+              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-blue-600 transition-all duration-300"
+                  style={{ width: `${(currentStep / 3) * 100}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="px-4 md:px-8 py-6 md:py-8 pb-12">
+              <div className="max-w-4xl mx-auto">
+              {/* KROK 2: Promo code + wybór pojazdu */}
+              {currentStep === 2 && (
+                <form onSubmit={handleStep2Submit} className="space-y-6">
 
           {/* Promo code */}
           <div>
@@ -746,6 +804,11 @@ export default function TransferBookingForm() {
           </p>
         </form>
       )}
-    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
