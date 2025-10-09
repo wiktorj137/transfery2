@@ -109,13 +109,18 @@ export default function LocationAutocomplete({
         query.toLowerCase().includes('lotnisk')
       );
 
-      const response = await fetch(
+      // Wyszukaj w Krakowie i okolicach używając bounding box
+      // Współrzędne obejmują Kraków i okolice (~50km promień)
+      // South-West: 49.8, 19.6 | North-East: 50.3, 20.3
+      const krakowResponse = await fetch(
         `https://nominatim.openstreetmap.org/search?` +
           `q=${encodeURIComponent(query)}` +
           `&countrycodes=pl` +
+          `&bounded=1` +
+          `&viewbox=19.6,50.3,20.3,49.8` +
           `&format=json` +
           `&addressdetails=1` +
-          `&limit=5` +
+          `&limit=10` +
           `&accept-language=pl`,
         {
           headers: {
@@ -124,9 +129,71 @@ export default function LocationAutocomplete({
         }
       );
 
-      const data = await response.json();
-      const combinedResults = [...matchingAirports, ...(data || [])];
-      setSuggestions(combinedResults);
+      const krakowData = await krakowResponse.json();
+
+      // Upewnij się że krakowData jest tablicą
+      const krakowResults = Array.isArray(krakowData) ? krakowData : [];
+
+      // Szukaj również w całej Polsce dla szerszego kontekstu
+      let additionalResults: NominatimResult[] = [];
+      const polandResponse = await fetch(
+        `https://nominatim.openstreetmap.org/search?` +
+          `q=${encodeURIComponent(query)}` +
+          `&countrycodes=pl` +
+          `&format=json` +
+          `&addressdetails=1` +
+          `&limit=8` +
+          `&accept-language=pl`,
+        {
+          headers: {
+            'User-Agent': 'AirportTransfer/1.0',
+          },
+        }
+      );
+      const polandData = await polandResponse.json();
+      additionalResults = Array.isArray(polandData) ? polandData : [];
+
+      // Połącz wszystkie wyniki
+      const allResults = [...krakowResults, ...additionalResults];
+      
+      // Usuń duplikaty na podstawie place_id
+      const uniqueResults = allResults.filter(
+        (result, index, self) =>
+          index === self.findIndex((r) => r.place_id === result.place_id)
+      );
+
+      // Współrzędne centrum Krakowa
+      const krakowLat = 50.0647;
+      const krakowLon = 19.9450;
+      
+      // Funkcja obliczająca odległość w km
+      const getDistance = (lat: number, lon: number) => {
+        const R = 6371; // promień Ziemi w km
+        const dLat = ((lat - krakowLat) * Math.PI) / 180;
+        const dLon = ((lon - krakowLon) * Math.PI) / 180;
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos((krakowLat * Math.PI) / 180) *
+            Math.cos((lat * Math.PI) / 180) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+      };
+
+      // Sortuj po odległości od Krakowa
+      const sortedResults = uniqueResults.sort((a: NominatimResult, b: NominatimResult) => {
+        const distA = getDistance(parseFloat(a.lat), parseFloat(a.lon));
+        const distB = getDistance(parseFloat(b.lat), parseFloat(b.lon));
+        return distA - distB;
+      });
+
+      const finalResults = [
+        ...matchingAirports, 
+        ...sortedResults
+      ];
+
+      setSuggestions(finalResults.slice(0, 8));
     } catch (error) {
       console.error('Błąd wyszukiwania:', error);
       setSuggestions([]);
@@ -165,12 +232,17 @@ export default function LocationAutocomplete({
 
   const formatAddress = (suggestion: NominatimResult) => {
     const addr = suggestion.address;
-    const street = addr.road ? 
-      `${addr.road}${addr.house_number ? ' ' + addr.house_number : ''}` : '';
-    const city = addr.city || addr.town || addr.village || '';
+    const displayParts = suggestion.display_name.split(', ');
+    
+    // Główna nazwa - pierwsza część (ulica, hotel, miejsce)
+    const mainName = displayParts[0] || '';
+    
+    // Szczegóły - reszta adresu
+    const details = displayParts.slice(1).join(', ');
     
     return {
-      main: street || city,
+      main: mainName,
+      details: details,
       full: suggestion.display_name,
     };
   };
@@ -224,12 +296,14 @@ export default function LocationAutocomplete({
                     <MapPin className="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-medium ${isAirport ? 'text-blue-900' : 'text-gray-900'}`}>
+                    <p className={`text-sm font-semibold ${isAirport ? 'text-blue-900' : 'text-gray-900'}`}>
                       {addr.main}
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {addr.full}
-                    </p>
+                    {addr.details && (
+                      <p className="text-xs text-gray-500 mt-0.5">
+                        {addr.details}
+                      </p>
+                    )}
                   </div>
                 </div>
               </button>

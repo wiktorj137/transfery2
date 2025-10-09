@@ -8,32 +8,31 @@ import Flatpickr from 'react-flatpickr';
 import { Calendar, Users, ArrowRight, ArrowLeft, Car, Sparkles, Crown, Tag, Check, CreditCard, Banknote, X } from 'lucide-react';
 import LocationAutocomplete from './LocationAutocomplete';
 import 'flatpickr/dist/flatpickr.min.css';
-import { Polish } from 'flatpickr/dist/l10n/pl';
 
-// Schemat walidacji dla kroku 1
+// Validation schema for step 1
 const step1Schema = z.object({
-  pickup: z.string().min(5, 'Podaj miejsce odbioru'),
-  dropoff: z.string().min(5, 'Podaj miejsce docelowe'),
-  date: z.date({ message: 'Wybierz datę i godzinę' }),
+  pickup: z.string().min(5, 'Please enter pickup location'),
+  dropoff: z.string().min(5, 'Please enter drop-off location'),
+  date: z.date({ message: 'Please select date and time' }),
   passengers: z.number().min(1).max(8),
 });
 
-// Schemat walidacji dla kroku 2
+// Validation schema for step 2
 const step2Schema = z.object({
   vehicleType: z.enum(['standard', 'premium', 'van', 'vip'], {
-    message: 'Wybierz typ pojazdu',
+    message: 'Please select vehicle type',
   }),
   promoCode: z.string().optional(),
 });
 
-// Schemat walidacji dla kroku 3
+// Validation schema for step 3
 const step3Schema = z.object({
-  firstName: z.string().min(2, 'Podaj imię'),
-  lastName: z.string().min(2, 'Podaj nazwisko'),
-  email: z.string().email('Podaj prawidłowy email'),
-  phone: z.string().min(9, 'Podaj prawidłowy numer telefonu'),
+  firstName: z.string().min(2, 'Please enter first name'),
+  lastName: z.string().min(2, 'Please enter last name'),
+  email: z.string().email('Please enter valid email'),
+  phone: z.string().min(9, 'Please enter valid phone number'),
   paymentMethod: z.enum(['online', 'cash'], {
-    message: 'Wybierz metodę płatności',
+    message: 'Please select payment method',
   }),
 });
 
@@ -86,47 +85,47 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
   const vehicleType = step2Form.watch('vehicleType');
   const paymentMethod = step3Form.watch('paymentMethod');
 
-  // Typy pojazdów z mnożnikiem ceny
+  // Vehicle types with price multiplier
   const vehicleTypes = [
     {
       id: 'standard' as const,
       name: 'Standard',
-      description: 'Komfortowe auto średniej klasy',
+      description: 'Comfortable mid-size car',
       example: 'VW Passat / Toyota Camry',
-      capacity: '1-4 osoby',
+      capacity: '1-4 people',
       icon: Car,
       multiplier: 1.0,
-      features: ['Klimatyzacja', 'Bagażnik 450L'],
+      features: ['Air conditioning', 'Trunk 450L'],
     },
     {
       id: 'premium' as const,
       name: 'Premium',
-      description: 'Luksusowy pojazd klasy wyższej',
+      description: 'Luxury higher-class vehicle',
       example: 'Mercedes E / BMW 5',
-      capacity: '1-4 osoby',
+      capacity: '1-4 people',
       icon: Sparkles,
       multiplier: 1.5,
-      features: ['Skórzana tapicerka', 'Wi-Fi', 'Woda'],
+      features: ['Leather seats', 'Wi-Fi', 'Water'],
     },
     {
       id: 'van' as const,
       name: 'Van',
-      description: 'Przestronny dla większych grup',
+      description: 'Spacious for larger groups',
       example: 'Mercedes V / VW Caravelle',
-      capacity: '5-8 osób',
+      capacity: '5-8 people',
       icon: Users,
       multiplier: 1.8,
-      features: ['Dużo miejsca', 'Bagażnik 1000L'],
+      features: ['Lots of space', 'Trunk 1000L'],
     },
     {
       id: 'vip' as const,
       name: 'VIP',
-      description: 'Ekskluzywna klasa premium',
+      description: 'Exclusive premium class',
       example: 'Mercedes S / BMW 7 / Audi A8',
-      capacity: '1-3 osoby',
+      capacity: '1-3 people',
       icon: Crown,
       multiplier: 2.5,
-      features: ['Maksymalny luksus', 'Szampan', 'Prasa'],
+      features: ['Maximum luxury', 'Champagne', 'Press'],
     },
   ];
 
@@ -194,7 +193,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   };
 
-  // Oblicz cenę na podstawie odległości i typu pojazdu
+  // Calculate price based on distance and vehicle type
   const calculatePrice = (vehicleId?: string) => {
     if (!pickupCoords || !dropoffCoords) return 0;
 
@@ -215,7 +214,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
     const basePrice = distance * 3 + 20;
     const price = Math.round(basePrice * multiplier);
 
-    // Zastosuj zniżkę jeśli promo code jest aktywny
+    // Apply discount if promo code is active
     if (promoCodeApplied && discount > 0) {
       return Math.round(price * (1 - discount / 100));
     }
@@ -223,7 +222,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
     return price;
   };
 
-  // Przelicz cenę gdy zmieni się typ pojazdu lub współrzędne
+  // Recalculate price when vehicle type or coordinates change
   useEffect(() => {
     if (pickupCoords && dropoffCoords) {
       const price = calculatePrice();
@@ -232,7 +231,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vehicleType, pickupCoords, dropoffCoords, promoCodeApplied, discount]);
 
-  // Obsługa promo code
+  // Handle promo code
   const handleApplyPromoCode = () => {
     if (promoCodeValue.toUpperCase() === 'PROMO10') {
       setPromoCodeApplied(true);
@@ -241,25 +240,25 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
       const price = calculatePrice();
       setEstimatedPrice(price);
     } else {
-      setPromoCodeError('Kod nieprawidłowy');
+      setPromoCodeError('Invalid code');
       setPromoCodeApplied(false);
       setDiscount(0);
     }
   };
 
-  // Krok 1: Przejdź dalej
+  // Step 1: Continue
   const handleStep1Submit = step1Form.handleSubmit(() => {
     saveToLocalStorage();
     setCurrentStep(2);
   });
 
-  // Krok 2: Przejdź dalej
+  // Step 2: Continue
   const handleStep2Submit = step2Form.handleSubmit(() => {
     saveToLocalStorage();
     setCurrentStep(3);
   });
 
-  // Krok 3: Finalna rezerwacja
+  // Step 3: Final booking
   const handleStep3Submit = step3Form.handleSubmit(async (data) => {
     try {
       const bookingData = {
@@ -273,30 +272,30 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
       console.log('Booking data:', bookingData);
 
       if (data.paymentMethod === 'online') {
-        // TODO: Integracja z Braintree
-        alert('Płatność online - integracja w trakcie');
+        // TODO: Braintree integration
+        alert('Online payment - integration in progress');
       } else {
-        // Zapłata kierowcy - potwierdzenie
+        // Payment to driver - confirmation
         localStorage.removeItem(STORAGE_KEY);
-        alert('Rezerwacja potwierdzona! Zapłata u kierowcy.');
+        alert('Booking confirmed! Payment to the driver.');
         window.location.href = '/';
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Błąd podczas rezerwacji');
+      alert('Error during booking');
     }
   });
 
   return (
     <>
-      {/* KROK 1 - Normalny formularz */}
+      {/* STEP 1 - Normal form */}
       {currentStep === 1 && (
         <div className="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-8">
           {/* Progress bar */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">Krok 1 z 3</span>
-              <span className="text-sm text-gray-500">Szczegóły transferu</span>
+              <span className="text-sm font-medium text-gray-700">Step 1 of 3</span>
+              <span className="text-sm text-gray-500">Transfer Details</span>
             </div>
             <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
               <div
@@ -308,10 +307,10 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
 
           <form onSubmit={handleStep1Submit} className="space-y-6">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-              Szczegóły transferu
+              Transfer Details
             </h2>
 
-          {/* Lokalizacje */}
+          {/* Locations */}
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <LocationAutocomplete
@@ -322,8 +321,8 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                     setPickupCoords(coords);
                   }
                 }}
-                label="Miejsce odbioru"
-                placeholder="np. Lotnisko Kraków-Balice"
+                label="Pickup Location"
+                placeholder="e.g. Krakow Airport"
               />
               {step1Form.formState.errors.pickup && (
                 <p className="text-red-500 text-sm mt-1">
@@ -341,8 +340,8 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                     setDropoffCoords(coords);
                   }
                 }}
-                label="Miejsce docelowe"
-                placeholder="np. Rynek Główny, Kraków"
+                label="Drop-off Location"
+                placeholder="e.g. Main Square, Krakow"
               />
               {step1Form.formState.errors.dropoff && (
                 <p className="text-red-500 text-sm mt-1">
@@ -352,11 +351,11 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             </div>
           </div>
 
-          {/* Data/Czas i Pasażerowie */}
+          {/* Date/Time and Passengers */}
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Data i godzina odbioru
+                Pickup Date and Time
               </label>
               <div className="relative">
                 <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-10 pointer-events-none" />
@@ -366,14 +365,13 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                     dateFormat: 'Y-m-d H:i',
                     minDate: 'today',
                     time_24hr: true,
-                    locale: Polish,
                     minuteIncrement: 15,
                   }}
                   onChange={(dates) => {
                     if (dates[0]) step1Form.setValue('date', dates[0]);
                   }}
                   className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                  placeholder="Wybierz datę i godzinę"
+                  placeholder="Select date and time"
                 />
               </div>
               {step1Form.formState.errors.date && (
@@ -385,7 +383,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Liczba pasażerów
+                Number of Passengers
               </label>
               <div className="relative">
                 <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -395,7 +393,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                 >
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                     <option key={num} value={num}>
-                      {num} {num === 1 ? 'osoba' : 'osoby'}
+                      {num} {num === 1 ? 'person' : 'people'}
                     </option>
                   ))}
                 </select>
@@ -408,21 +406,21 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             type="submit"
             className="w-full bg-blue-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
           >
-            Dalej
+            Continue
             <ArrowRight className="w-5 h-5" />
           </button>
         </form>
         </div>
       )}
 
-      {/* KROK 2 i 3 - Fullscreen Modal */}
+      {/* STEP 2 & 3 - Fullscreen Modal */}
       {(currentStep === 2 || currentStep === 3) && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center overflow-y-auto animate-fadeIn">
           <div className="min-h-screen w-full bg-white md:m-4 md:rounded-2xl md:shadow-2xl md:max-w-6xl animate-slideUp">
             {/* Close button */}
             <div className="sticky top-0 bg-white z-10 border-b border-gray-200 px-4 md:px-8 py-4 flex items-center justify-between md:rounded-t-2xl">
               <h2 className="text-xl md:text-2xl font-bold text-gray-900">
-                {currentStep === 2 ? 'Wybierz pojazd' : 'Dane i płatność'}
+                {currentStep === 2 ? 'Select Vehicle' : 'Details & Payment'}
               </h2>
               <button
                 type="button"
@@ -440,10 +438,10 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             {/* Progress bar */}
             <div className="px-4 md:px-8 py-4 border-b border-gray-200">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700">Krok {currentStep} z 3</span>
+                <span className="text-sm font-medium text-gray-700">Step {currentStep} of 3</span>
                 <span className="text-sm text-gray-500">
-                  {currentStep === 2 && 'Wybór pojazdu'}
-                  {currentStep === 3 && 'Dane i płatność'}
+                  {currentStep === 2 && 'Vehicle Selection'}
+                  {currentStep === 3 && 'Details & Payment'}
                 </span>
               </div>
               <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -457,14 +455,14 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             {/* Content */}
             <div className="px-4 md:px-8 py-6 md:py-8 pb-12">
               <div className="max-w-4xl mx-auto">
-              {/* KROK 2: Promo code + wybór pojazdu */}
+              {/* STEP 2: Promo code + vehicle selection */}
               {currentStep === 2 && (
                 <form onSubmit={handleStep2Submit} className="space-y-6">
 
           {/* Promo code */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Kod promocyjny (opcjonalnie)
+              Promo Code (optional)
             </label>
             <div className="flex gap-2">
               <div className="relative flex-1">
@@ -477,7 +475,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                     setPromoCodeError('');
                     setPromoCodeApplied(false);
                   }}
-                  placeholder="np. PROMO10"
+                  placeholder="e.g. PROMO10"
                   disabled={promoCodeApplied}
                   className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
                 />
@@ -488,7 +486,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                 disabled={promoCodeApplied}
                 className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
-                {promoCodeApplied ? <Check className="w-5 h-5" /> : 'Zastosuj'}
+                {promoCodeApplied ? <Check className="w-5 h-5" /> : 'Apply'}
               </button>
             </div>
             {promoCodeError && (
@@ -497,15 +495,15 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             {promoCodeApplied && (
               <p className="text-green-600 text-sm mt-1 flex items-center gap-1">
                 <Check className="w-4 h-4" />
-                Kod zastosowany! Zniżka -{discount}%
+                Code applied! Discount -{discount}%
               </p>
             )}
           </div>
 
-          {/* Wybór typu pojazdu z cenami */}
+          {/* Vehicle type selection with prices */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-3">
-              Wybierz typ pojazdu
+              Select Vehicle Type
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {vehicleTypes.map((vehicle) => {
@@ -567,7 +565,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             )}
           </div>
 
-          {/* Nawigacja */}
+          {/* Navigation */}
           <div className="flex gap-4">
             <button
               type="button"
@@ -578,78 +576,78 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               className="flex-1 bg-gray-200 text-gray-700 font-semibold py-4 px-6 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2"
             >
               <ArrowLeft className="w-5 h-5" />
-              Wstecz
+              Back
             </button>
             <button
               type="submit"
               className="flex-1 bg-blue-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
             >
-              Przejdź do płatności
+              Continue to Payment
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         </form>
       )}
 
-      {/* KROK 3: Dane kontaktowe + płatność */}
+      {/* STEP 3: Contact details + payment */}
       {currentStep === 3 && (
         <form onSubmit={handleStep3Submit} className="space-y-6">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-            Dane kontaktowe i płatność
+            Contact Details & Payment
           </h2>
 
-          {/* Podsumowanie rezerwacji */}
+          {/* Booking summary */}
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
-            <h3 className="font-semibold text-gray-900 mb-4">Podsumowanie</h3>
+            <h3 className="font-semibold text-gray-900 mb-4">Summary</h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-gray-600">Trasa:</span>
+                <span className="text-gray-600">Route:</span>
                 <span className="font-medium text-gray-900">
                   {step1Form.getValues('pickup')} → {step1Form.getValues('dropoff')}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Data:</span>
+                <span className="text-gray-600">Date:</span>
                 <span className="font-medium text-gray-900">
-                  {step1Form.getValues('date')?.toLocaleString('pl-PL')}
+                  {step1Form.getValues('date')?.toLocaleString('en-US')}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Pasażerowie:</span>
+                <span className="text-gray-600">Passengers:</span>
                 <span className="font-medium text-gray-900">
                   {step1Form.getValues('passengers')}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Pojazd:</span>
+                <span className="text-gray-600">Vehicle:</span>
                 <span className="font-medium text-gray-900">
                   {vehicleTypes.find(v => v.id === vehicleType)?.name}
                 </span>
               </div>
               {promoCodeApplied && (
                 <div className="flex justify-between text-green-600">
-                  <span>Kod promocyjny:</span>
+                  <span>Promo code:</span>
                   <span className="font-medium">-{discount}%</span>
                 </div>
               )}
               <div className="pt-2 border-t border-blue-200 flex justify-between items-baseline">
-                <span className="text-gray-900 font-semibold">Cena całkowita:</span>
+                <span className="text-gray-900 font-semibold">Total Price:</span>
                 <span className="text-3xl font-bold text-blue-600">{estimatedPrice} PLN</span>
               </div>
             </div>
           </div>
 
-          {/* Dane kontaktowe */}
+          {/* Contact details */}
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Imię
+                First Name
               </label>
               <input
                 type="text"
                 {...step3Form.register('firstName')}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                placeholder="Jan"
+                placeholder="John"
               />
               {step3Form.formState.errors.firstName && (
                 <p className="text-red-500 text-sm mt-1">
@@ -660,13 +658,13 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Nazwisko
+                Last Name
               </label>
               <input
                 type="text"
                 {...step3Form.register('lastName')}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                placeholder="Kowalski"
+                placeholder="Smith"
               />
               {step3Form.formState.errors.lastName && (
                 <p className="text-red-500 text-sm mt-1">
@@ -683,7 +681,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                 type="email"
                 {...step3Form.register('email')}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                placeholder="jan.kowalski@email.com"
+                placeholder="john.smith@email.com"
               />
               {step3Form.formState.errors.email && (
                 <p className="text-red-500 text-sm mt-1">
@@ -694,7 +692,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Telefon
+                Phone
               </label>
               <input
                 type="tel"
@@ -710,10 +708,10 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             </div>
           </div>
 
-          {/* Metoda płatności */}
+          {/* Payment method */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-3">
-              Metoda płatności
+              Payment Method
             </label>
             <div className="grid md:grid-cols-2 gap-4">
               <button
@@ -732,8 +730,8 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                     }`}
                   />
                   <div>
-                    <p className="font-semibold text-gray-900 mb-1">Płatność online</p>
-                    <p className="text-sm text-gray-600">Karta płatnicza / BLIK</p>
+                    <p className="font-semibold text-gray-900 mb-1">Online Payment</p>
+                    <p className="text-sm text-gray-600">Credit card / BLIK</p>
                   </div>
                 </div>
                 {paymentMethod === 'online' && (
@@ -761,8 +759,8 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                     }`}
                   />
                   <div>
-                    <p className="font-semibold text-gray-900 mb-1">Zapłać kierowcy</p>
-                    <p className="text-sm text-gray-600">Gotówka lub karta u kierowcy</p>
+                    <p className="font-semibold text-gray-900 mb-1">Pay the Driver</p>
+                    <p className="text-sm text-gray-600">Cash or card with driver</p>
                   </div>
                 </div>
                 {paymentMethod === 'cash' && (
@@ -776,7 +774,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             </div>
           </div>
 
-          {/* Nawigacja */}
+          {/* Navigation */}
           <div className="flex gap-4">
             <button
               type="button"
@@ -787,20 +785,20 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               className="flex-1 bg-gray-200 text-gray-700 font-semibold py-4 px-6 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2"
             >
               <ArrowLeft className="w-5 h-5" />
-              Wstecz
+              Back
             </button>
             <button
               type="submit"
               disabled={step3Form.formState.isSubmitting}
               className="flex-1 bg-green-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50"
             >
-              {step3Form.formState.isSubmitting ? 'Przetwarzanie...' : 'Potwierdź rezerwację'}
+              {step3Form.formState.isSubmitting ? 'Processing...' : 'Confirm Booking'}
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
 
           <p className="text-sm text-gray-500 text-center">
-            Bezpłatna anulacja do 24h przed transferem
+            Free cancellation up to 24h before transfer
           </p>
         </form>
       )}
