@@ -1,0 +1,135 @@
+{
+  "common": {
+    "bookNow": "Book Now",
+    "from": "from",
+    "to": "to",
+    "passengers": "Passengers",
+    "date": "Date",
+    "time": "Time",
+    "price": "Price",
+    "total": "Total",
+    "next": "Next",
+    "back": "Back",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "hero": {
+    "title": "Airport Transfers in Kraków",
+    "subtitle": "Professional transport to and from the airport. Comfortable, safe, on time.",
+    "cta": "Book Transfer"
+  },
+  "features": {
+    "24_7": "24/7",
+    "safety": "Safety",
+    "comfort": "Comfort",
+    "experienced": "Experienced Drivers"
+  },
+  "popularRoutes": {
+    "title": "Popular Routes",
+    "subtitle": "Choose from our most popular destinations",
+    "viewAll": "View All Routes"
+  },
+  "booking": {
+    "title": "Book Your Transfer",
+    "step1": "Route & Date",
+    "step2": "Vehicle",
+    "step3": "Your Details",
+    "pickup": "Pickup Location",
+    "dropoff": "Drop-off Location",
+    "pickupPlaceholder": "Enter pickup address or select from popular places",
+    "dropoffPlaceholder": "Enter drop-off address or select from popular places",
+    "selectDate": "Select Date & Time",
+    "selectPassengers": "Number of Passengers",
+    "promoCode": "Promo Code",
+    "promoCodePlaceholder": "Enter promo code (optional)",
+    "applyPromo": "Apply",
+    "promoApplied": "Promo code applied!",
+    "promoInvalid": "Invalid promo code",
+    "selectVehicle": "Select Vehicle Type",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone Number",
+    "email": "Email Address",
+    "notes": "Additional Notes",
+    "notesPlaceholder": "e.g., 'Please wait with a sign', 'I have 3 large suitcases'...",
+    "agreeTerms": "I agree to the Terms & Conditions and Privacy Policy",
+    "proceedToPayment": "Proceed to Payment",
+    "backToForm": "Back to Form",
+    "estimatedPrice": "Estimated Price",
+    "discount": "Discount",
+    "finalPrice": "Final Price",
+    "prefilledNotice": "Please specify the exact address for pickup/drop-off"
+  },
+  "vehicles": {
+    "standard": {
+      "name": "Sedan / Economy",
+      "description": "Comfortable sedan car",
+      "passengers": "1-4 passengers",
+      "luggage": "3 suitcases"
+    },
+    "comfort": {
+      "name": "Mercedes E-Class / BMW 5",
+      "description": "Premium comfort",
+      "passengers": "1-4 passengers",
+      "luggage": "3 suitcases"
+    },
+    "premium": {
+      "name": "Mercedes S-Class / BMW 7",
+      "description": "Luxury experience",
+      "passengers": "1-3 passengers",
+      "luggage": "2 suitcases"
+    },
+    "van": {
+      "name": "Van 8 seats",
+      "description": "For groups",
+      "passengers": "5-8 passengers",
+      "luggage": "6 suitcases"
+    }
+  },
+  "payment": {
+    "title": "Payment",
+    "summary": "Booking Summary",
+    "selectMethod": "Select Payment Method",
+    "paypal": "Pay with PayPal",
+    "card": "Credit Card",
+    "cash": "Cash to Driver",
+    "comingSoon": "(coming soon)",
+    "securePayment": "Secure Payment",
+    "secureNotice": "Your data is protected by SSL encryption. Payments processed by PayPal / Braintree.",
+    "processing": "Processing...",
+    "customerData": "Customer Details"
+  },
+  "confirmation": {
+    "title": "Booking Confirmed!",
+    "subtitle": "Thank you for using our services. Your transfer has been booked.",
+    "bookingNumber": "Booking Number",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "emailSent": "Confirmation sent to email",
+    "emailNotice": "Booking details and driver contact information have been sent to your email. Please check spam folder.",
+    "driverContact": "Driver will contact you",
+    "driverNotice": "24 hours before the transfer you will receive an SMS with driver contact details and pickup information.",
+    "travelPrep": "Travel Preparation",
+    "travelNotice": "The driver will be waiting with a sign with your name. In case of flight delay, please contact us.",
+    "whatNext": "What's Next?",
+    "step1": "Check your email - booking confirmation should be there",
+    "step2": "Save the booking number - you may need it to contact us",
+    "step3": "Wait for SMS with driver details 24h before transfer",
+    "step4": "On transfer day, driver will be waiting at the agreed location",
+    "needHelp": "Need Help?",
+    "hotline": "24/7 Hotline",
+    "backHome": "Back to Homepage",
+    "bookAnother": "Book Another Transfer"
+  },
+  "footer": {
+    "contact": "Contact",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved"
+  }
+}
