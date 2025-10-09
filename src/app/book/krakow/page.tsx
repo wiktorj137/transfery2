@@ -126,7 +126,7 @@ export default function KrakowTransferPage() {
               </p>
 
               <div className="space-y-4">
-                <h4 className="font-semibold text-gray-900 text-lg mb-3">What's Included</h4>
+                <h4 className="font-semibold text-gray-900 text-lg mb-3">What&apos;s Included</h4>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">

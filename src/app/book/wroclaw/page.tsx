@@ -40,8 +40,8 @@ export default function WroclawTransferPage() {
               </h1>
               
               <p className="text-xl text-gray-600 mb-6">
-                Premium transfer service from Kraków to Wrocław, the beautiful "Venice of Poland". 
-                Discover Lower Silesia's capital in comfort and style.
+                Premium transfer service from Kraków to Wrocław, the beautiful &quot;Venice of Poland&quot;. 
+                Discover Lower Silesia&apos;s capital in comfort and style.
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-8">
@@ -117,7 +117,7 @@ export default function WroclawTransferPage() {
                 <h3 className="text-2xl font-bold text-gray-900">To Venice of Poland</h3>
               </div>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                We offer comfortable transfer service from Kraków to Wrocław, one of Poland's most beautiful cities. Known as the "Venice of Poland" 
+                We offer comfortable transfer service from Kraków to Wrocław, one of Poland&apos;s most beautiful cities. Known as the &quot;Venice of Poland&quot; 
                 for its numerous bridges and islands. Please book in advance to reserve your transfer.
               </p>
 
@@ -229,7 +229,7 @@ export default function WroclawTransferPage() {
               <h3 className="text-2xl font-bold text-gray-900">Why Visit Wrocław?</h3>
             </div>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              Wrocław is one of Poland's hidden gems, offering unforgettable experiences:
+              Wrocław is one of Poland&apos;s hidden gems, offering unforgettable experiences:
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">

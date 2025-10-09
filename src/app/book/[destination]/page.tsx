@@ -14,7 +14,7 @@ const destinations = {
     distance: '70 km',
     duration: '1h 20min',
     price: 150,
-    image: 'https://images.unsplash.com/photo-1568454537842-d933259bb258?w=1600&q=80',
+    image: '/images/Auschwitz-Birkenau.jpg',
     description: 'Visit the world\'s most significant Holocaust memorial and museum. A powerful and deeply moving experience that provides essential historical context about one of humanity\'s darkest periods.',
     highlights: [
       'UNESCO World Heritage Site',
@@ -49,7 +49,7 @@ const destinations = {
     distance: '15 km',
     duration: '30min',
     price: 100,
-    image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1600&q=80',
+    image: '/images/wieliczka-salt-mine.jpg',
     description: 'Explore one of the world\'s oldest operating salt mines, featuring stunning underground chambers, chapels carved entirely from salt, and beautiful underground lakes 135 meters below ground.',
     highlights: [
       'UNESCO World Heritage Site since 1978',
@@ -84,7 +84,7 @@ const destinations = {
     distance: '110 km',
     duration: '2h',
     price: 350,
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80',
+    image: '/images/zakopane-tatry.jpg',
     description: 'Experience Poland\'s winter capital and premier mountain resort. Enjoy breathtaking views of the Tatra Mountains, traditional highland culture, skiing, hiking, and the famous Krupówki street.',
     highlights: [
       'Highest mountains in Poland (2,499m)',
@@ -119,7 +119,7 @@ const destinations = {
     distance: '100 km',
     duration: '2h',
     price: 280,
-    image: 'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?w=1600&q=80',
+    image: '/images/dunajec-river.jpg',
     description: 'Experience an unforgettable traditional wooden raft journey through the spectacular Dunajec River gorge in the Pieniny Mountains. One of Poland\'s most scenic outdoor adventures.',
     highlights: [
       'Pieniny National Park beauty',
@@ -154,7 +154,7 @@ const destinations = {
     distance: '30 km',
     duration: '45min',
     price: 120,
-    image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80',
+    image: '/images/ojcow-park.jpg',
     description: 'Discover Poland\'s smallest but most beautiful national park featuring stunning limestone cliffs, mysterious caves, and the magnificent Pieskowa Skała Renaissance castle perched on a rocky outcrop.',
     highlights: [
       'Poland\'s smallest national park',
@@ -189,7 +189,7 @@ const destinations = {
     distance: '130 km',
     duration: '2h',
     price: 280,
-    image: 'https://images.unsplash.com/photo-1519489548734-38a3687842a3?w=1600&q=80',
+    image: '/images/czestochowa.jpg',
     description: 'Visit Poland\'s most important Catholic shrine and home of the miraculous Black Madonna icon. Jasna Góra Monastery is a major pilgrimage destination visited by millions annually, including Pope John Paul II.',
     highlights: [
       'Home of the Black Madonna icon',
@@ -224,7 +224,7 @@ const destinations = {
     distance: '50 km',
     duration: '1h',
     price: 140,
-    image: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1600&q=80',
+    image: '/images/wadowice.jpg',
     description: 'Visit the charming town where Pope John Paul II was born. Explore his family home (now a museum), the church where he was baptized, and taste the famous Wadowice kremówka cream cake that the Pope loved.',
     highlights: [
       'Pope John Paul II Family Home Museum',
@@ -485,10 +485,8 @@ export default function DestinationBookingPage() {
                     <p className="text-blue-100 text-sm">Quick and easy booking process</p>
                   </div>
                   
-                  {/* Form */}
-                  <div className="p-6">
-                    <TransferBookingForm />
-                  </div>
+                  {/* Form - No padding wrapper to allow form full width */}
+                  <TransferBookingForm />
                 </div>
                 
                 {/* Trust Badges */}

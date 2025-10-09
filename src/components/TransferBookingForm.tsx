@@ -151,7 +151,8 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             setDiscount(10);
           }
         }
-        if (data.currentStep) setCurrentStep(data.currentStep);
+        // Zawsze zaczynaj od kroku 1 po odświeżeniu strony
+        // (dane są zachowane, ale użytkownik musi przejść przez formularz)
       } catch (e) {
         console.error('Błąd wczytywania danych:', e);
       }
@@ -290,12 +291,12 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
     <>
       {/* STEP 1 - Normal form */}
       {currentStep === 1 && (
-        <div className="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+        <div className="w-full bg-transparent p-6 md:p-8">
           {/* Progress bar */}
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">Step 1 of 3</span>
-              <span className="text-sm text-gray-500">Transfer Details</span>
+              <span className="text-xs sm:text-sm font-medium text-gray-700">Step 1 of 3</span>
+              <span className="text-xs sm:text-sm text-gray-500">Transfer Details</span>
             </div>
             <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
               <div
@@ -305,8 +306,8 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             </div>
           </div>
 
-          <form onSubmit={handleStep1Submit} className="space-y-6">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+          <form onSubmit={handleStep1Submit} className="space-y-4 sm:space-y-6">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
               Transfer Details
             </h2>
 

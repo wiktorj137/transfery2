@@ -40,7 +40,7 @@ export default function WarsawTransferPage() {
               </h1>
               
               <p className="text-xl text-gray-600 mb-6">
-                Premium long-distance transfer service from Kraków to Warsaw, Poland's capital. 
+                Premium long-distance transfer service from Kraków to Warsaw, Poland&apos;s capital. 
                 Travel in comfort on the A4 highway with professional drivers.
               </p>
 
