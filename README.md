@@ -1,103 +1,102 @@
-# 🚕 Transfer Lotniskowy - System Rezerwacji
+# Transfer Lotniskowy - System Rezerwacji
 
-Nowoczesna aplikacja do rezerwacji transferów lotniskowych. **100% darmowa, bez kart kredytowych, bez rejestracji!**
+Aplikacja webowa do rezerwacji transferów lotniskowych w Polsce.
 
-## 🚀 Tech Stack
+## Technologie
 
-- **Next.js 15.5.4** + TypeScript + Tailwind CSS 4
-- **Nominatim (OpenStreetMap)** - Autocomplete adresów (całkowicie darmowe!)
-- **Flatpickr** - Date/Time picker
-- **React Hook Form + Zod** - Walidacja
+- Next.js 15.5.4 z TypeScript
+- Tailwind CSS 4
+- React Hook Form + Zod
+- Flatpickr
+- next-intl (wsparcie wielojęzyczności)
+- Nominatim API (geokodowanie adresów)
 
-## ⚡ Quick Start
+## Instalacja i uruchomienie
 
 ```bash
 npm install
 npm run dev
 ```
 
-**To wszystko! Działa od razu, bez konfiguracji!**
+Aplikacja będzie dostępna pod adresem `http://localhost:3000`
 
-## ✅ Funkcje
+## Funkcjonalność
 
-### 🎯 Formularz rezerwacji (3 kroki)
-- ✅ **Krok 1:** Lokalizacje + data/czas + pasażerowie
-- ✅ **Krok 2:** Kod promocyjny + wybór pojazdu z cenami
-- ✅ **Krok 3:** Dane kontaktowe + wybór płatności
-- ✅ Progress bar (wizualizacja postępu)
-- ✅ Nawigacja wstecz między krokami
-- ✅ LocalStorage persistence (dane przetrwają odświeżenie)
+### Formularz rezerwacji
+Trzy-krokowy proces rezerwacji:
+1. Wybór lokalizacji, daty/czasu i liczby pasażerów
+2. Kod promocyjny i wybór pojazdu z prezentacją cen
+3. Dane kontaktowe i metoda płatności
 
-### 💰 System cenowy
-- ✅ Autocomplete adresów dla Polski (Nominatim)
-- ✅ Automatyczna kalkulacja ceny (dystans × stawka × typ pojazdu)
-- ✅ Kody promocyjne (PROMO10 = -10% zniżki)
-- ✅ Ceny wyświetlane przy każdym typie pojazdu
-- ✅ Wizualizacja zniżki (przekreślona cena)
-
-### 🚗 Typy pojazdów
-- ✅ Standard (1.0x) - VW Passat / Toyota Camry
-- ✅ Premium (1.5x) - Mercedes E / BMW 5
-- ✅ Van (1.8x) - Mercedes V / VW Caravelle
-- ✅ VIP (2.5x) - Mercedes S / BMW 7
-
-### 💳 Płatności
-- ✅ Płatność online (przygotowane pod Braintree)
-- ✅ Zapłać kierowcy (gotówka/karta)
-
-### 🎨 UI/UX
-- ✅ Polski date/time picker (Flatpickr)
-- ✅ Walidacja formularzy (React Hook Form + Zod)
-- ✅ Responsywny design (mobile-first)
-- ✅ **Bez API keys, bez kart, bez rejestracji**
-
-## 💰 Koszty
-
-**0 PLN** - wszystko darmowe:
-- Nominatim OSM - unlimited requests (z rate limiting)
-- Flatpickr - open source
-- Next.js - darmowy hosting na Vercel
-
-## 🧮 Model biznesowy
-
-### Wzór cenowy
+### Kalkulacja ceny
+Podstawowa formuła cenowa:
 ```
-cena_bazowa = (dystans_km × 3 PLN) + 20 PLN start
-cena_pojazdu = cena_bazowa × mnożnik_typu_pojazdu
-cena_końcowa = cena_pojazdu × (1 - zniżka_z_kodu_promo)
+cena = (dystans_km * 3 PLN + 20 PLN) * mnożnik_pojazdu * (1 - rabat)
 ```
 
-### Przykłady (Lotnisko → Centrum, 20km)
+Dostępne pojazdy:
+- Standard (1.0x) - VW Passat, Toyota Camry
+- Premium (1.5x) - Mercedes E-Class, BMW 5
+- Van (1.8x) - Mercedes V-Class, VW Caravelle
+- VIP (2.5x) - Mercedes S-Class, BMW 7
 
-**Bez kodu promocyjnego:**
-- Standard (1.0x): **80 PLN**
-- Premium (1.5x): **120 PLN**
-- Van (1.8x): **144 PLN**
-- VIP (2.5x): **200 PLN**
+### Kody promocyjne
+Wspierane kody rabatowe:
+- PROMO10 - 10% zniżki
 
-**Z kodem PROMO10 (-10%):**
-- Standard: ~~80 PLN~~ → **72 PLN**
-- Premium: ~~120 PLN~~ → **108 PLN**
-- Van: ~~144 PLN~~ → **130 PLN**
-- VIP: ~~200 PLN~~ → **180 PLN**
+### Metody płatności
+- Płatność online (Braintree integration)
+- Płatność kierowcy (gotówka/karta)
 
-### Popularne trasy
-- Lotnisko → Centrum (20km): 80-200 PLN
-- Lotnisko → Zakopane (100km): 320-800 PLN
-- Lotnisko → Katowice (60km): 200-500 PLN
+## Wielojęzyczność
 
-## 🛠️ Komendy
+Aplikacja obsługuje następujące języki:
+- Polski (domyślny)
+- Francuski
+- Włoski
+
+Pliki tłumaczeń znajdują się w katalogu `messages/`.
+
+## Deployment na GitHub Pages
+
+Projekt jest skonfigurowany do automatycznego deploymentu na GitHub Pages:
+
+1. W ustawieniach repozytorium przejdź do Settings > Pages
+2. W sekcji "Build and deployment" wybierz Source: GitHub Actions
+3. Przy każdym push do main branch, aplikacja zostanie automatycznie zbudowana i wdrożona
+
+Aplikacja dostępna pod adresem: `https://wiktorj137.github.io/transfery2/`
+
+## Struktura projektu
+
+```
+src/
+  app/          - Strony aplikacji (App Router)
+  components/   - Komponenty React
+  config/       - Konfiguracja tras
+  types/        - Typy TypeScript
+messages/       - Pliki tłumaczeń
+public/         - Zasoby statyczne
+```
+
+## Komendy
 
 ```bash
-npm run dev          # Dev server (http://localhost:3000)
-npm run build        # Production build
-npm run start        # Production server
-npm run lint         # ESLint check
+npm run dev       # Serwer deweloperski
+npm run build     # Build produkcyjny
+npm run start     # Serwer produkcyjny
+npm run lint      # Sprawdzenie ESLint
 ```
 
-## 📚 Dokumentacja
+## Konfiguracja środowiska
 
-- **[FORMULARZ_CHANGELOG.md](./FORMULARZ_CHANGELOG.md)** - Szczegółowy opis zmian w formularzu 3-krokowym
+Skopiuj `.env.example` do `.env.local` i uzupełnij wymagane zmienne:
+
+```bash
+cp .env.example .env.local
+```
+
+Wymagane zmienne środowiskowe dla integracji Braintree znajdują się w pliku `.env.example`.
 - **[TESTING_GUIDE.md](./TESTING_GUIDE.md)** - Przewodnik testowania z przykładami
 - **[TODO.md](./TODO.md)** - Lista rzeczy do zrobienia (backend, integracje)
 
