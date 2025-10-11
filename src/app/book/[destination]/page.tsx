@@ -358,7 +358,7 @@ export default function DestinationBookingPage() {
       </section>
 
       {/* Content Section - Redesigned */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 px-3 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Left Column - Content */}
@@ -485,8 +485,10 @@ export default function DestinationBookingPage() {
                     <p className="text-blue-100 text-sm">Quick and easy booking process</p>
                   </div>
                   
-                  {/* Form - No padding wrapper to allow form full width */}
-                  <TransferBookingForm />
+                  {/* Form with padding */}
+                  <div className="p-4 sm:p-6">
+                    <TransferBookingForm />
+                  </div>
                 </div>
                 
                 {/* Trust Badges */}

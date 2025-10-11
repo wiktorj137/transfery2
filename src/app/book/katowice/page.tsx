@@ -90,13 +90,15 @@ export default function KatowiceTransferPage() {
         </div>
       </section>
 
-      <section className="pb-12 px-4">
+      <section className="pb-12 px-3 sm:px-4">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-3">Book Your Transfer</h2>
             <p className="text-gray-600">Enter your details and get instant confirmation</p>
           </div>
-          <TransferBookingForm defaultDestination="Katowice" />
+          <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8">
+            <TransferBookingForm defaultDestination="Katowice" />
+          </div>
         </div>
       </section>
 

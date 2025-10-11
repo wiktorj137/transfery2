@@ -4,10 +4,8 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import Flatpickr from 'react-flatpickr';
 import { Calendar, Users, ArrowRight, ArrowLeft, Car, Sparkles, Crown, Tag, Check, CreditCard, Banknote, X } from 'lucide-react';
 import LocationAutocomplete from './LocationAutocomplete';
-import 'flatpickr/dist/flatpickr.min.css';
 
 // Validation schema for step 1
 const step1Schema = z.object({
@@ -291,7 +289,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
     <>
       {/* STEP 1 - Normal form */}
       {currentStep === 1 && (
-        <div className="w-full bg-transparent p-6 md:p-8">
+        <div className="w-full bg-transparent">
           {/* Progress bar */}
           <div className="mb-6 sm:mb-8">
             <div className="flex items-center justify-between mb-2">
@@ -312,8 +310,8 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             </h2>
 
           {/* Locations */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
+          <div className="grid md:grid-cols-2 gap-4 w-full">
+            <div className="w-full min-w-0">
               <LocationAutocomplete
                 value={pickup || ''}
                 onChange={(value, coords) => {
@@ -332,7 +330,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               )}
             </div>
 
-            <div>
+            <div className="w-full min-w-0">
               <LocationAutocomplete
                 value={dropoff || ''}
                 onChange={(value, coords) => {
@@ -353,26 +351,20 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
           </div>
 
           {/* Date/Time and Passengers */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
+          <div className="grid md:grid-cols-2 gap-4 w-full">
+            <div className="w-full min-w-0">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Pickup Date and Time
               </label>
-              <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-10 pointer-events-none" />
-                <Flatpickr
-                  options={{
-                    enableTime: true,
-                    dateFormat: 'Y-m-d H:i',
-                    minDate: 'today',
-                    time_24hr: true,
-                    minuteIncrement: 15,
-                  }}
-                  onChange={(dates) => {
-                    if (dates[0]) step1Form.setValue('date', dates[0]);
-                  }}
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                  placeholder="Select date and time"
+              <div className="relative w-full">
+                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+                <input
+                  type="datetime-local"
+                  {...step1Form.register('date', {
+                    setValueAs: (value) => value ? new Date(value) : undefined,
+                  })}
+                  min={new Date().toISOString().slice(0, 16)}
+                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition box-border"
                 />
               </div>
               {step1Form.formState.errors.date && (
@@ -382,15 +374,15 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               )}
             </div>
 
-            <div>
+            <div className="w-full min-w-0">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Number of Passengers
               </label>
-              <div className="relative">
+              <div className="relative w-full">
                 <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <select
                   {...step1Form.register('passengers', { valueAsNumber: true })}
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition appearance-none bg-white"
+                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition appearance-none bg-white box-border"
                 >
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                     <option key={num} value={num}>

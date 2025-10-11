@@ -4,6 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Krakow Airport Transfer | Professional Private Taxi Service | 24/7",
   description: "Book reliable airport transfers in Krakow. Professional drivers, modern vehicles, competitive prices. Door-to-door service from Krakow Airport (KRK) to city center, hotels & tours.",
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
   keywords: [
     "Krakow airport transfer",
     "Krakow taxi",
