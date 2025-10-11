@@ -18,6 +18,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Hide sticky elements on page (but NOT in modal) when modal is open to prevent overlap */
+body.modal-open .sticky:not(.booking-modal-overlay .sticky) {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Fix for datetime-local input on mobile devices */
 input[type="datetime-local"],
 input[type="date"],

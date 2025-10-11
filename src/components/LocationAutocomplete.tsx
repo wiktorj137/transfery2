@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { MapPin, Loader2, Plane } from 'lucide-react';
+import { MapPin, Loader2, Plane, Hotel, Train } from 'lucide-react';
 
 interface LocationAutocompleteProps {
   value: string;
@@ -23,64 +23,90 @@ interface NominatimResult {
     village?: string;
   };
   isCustom?: boolean;
+  icon?: 'airport' | 'train' | 'hotel' | 'location';
 }
 
-const POPULAR_AIRPORTS: NominatimResult[] = [
+const POPULAR_LOCATIONS: NominatimResult[] = [
   {
     place_id: -1,
-    display_name: 'Lotnisko Kraków-Balice im. Jana Pawła II (KRK)',
+    display_name: 'Krakow Airport - Balice (KRK)',
     lat: '50.0777',
     lon: '19.7848',
-    address: { city: 'Kraków' },
+    address: { city: 'Krakow' },
     isCustom: true,
+    icon: 'airport',
   },
   {
     place_id: -2,
-    display_name: 'Lotnisko Warszawa-Okęcie im. Fryderyka Chopina (WAW)',
-    lat: '52.1657',
-    lon: '20.9679',
-    address: { city: 'Warszawa' },
+    display_name: 'Krakow Old Town - Main Square',
+    lat: '50.0619',
+    lon: '19.9369',
+    address: { city: 'Krakow' },
     isCustom: true,
+    icon: 'location',
   },
   {
     place_id: -3,
-    display_name: 'Lotnisko Warszawa-Modlin (WMI)',
-    lat: '52.4511',
-    lon: '20.6519',
-    address: { city: 'Warszawa' },
+    display_name: 'Krakow Main Railway Station',
+    lat: '50.0676',
+    lon: '19.9467',
+    address: { city: 'Krakow' },
     isCustom: true,
+    icon: 'train',
   },
   {
     place_id: -4,
-    display_name: 'Lotnisko Gdańsk im. Lecha Wałęsy (GDN)',
-    lat: '54.3776',
-    lon: '18.4662',
-    address: { city: 'Gdańsk' },
+    display_name: 'Krakow Bus Station (MDA)',
+    lat: '50.0682',
+    lon: '19.9504',
+    address: { city: 'Krakow' },
     isCustom: true,
+    icon: 'train',
   },
   {
     place_id: -5,
-    display_name: 'Lotnisko Katowice-Pyrzowice (KTW)',
-    lat: '50.4743',
-    lon: '19.0800',
-    address: { city: 'Katowice' },
+    display_name: 'Hotel Stary - Szczepanska 5, Krakow',
+    lat: '50.0621',
+    lon: '19.9344',
+    address: { city: 'Krakow', road: 'Szczepanska' },
     isCustom: true,
+    icon: 'hotel',
   },
   {
     place_id: -6,
-    display_name: 'Lotnisko Wrocław-Strachowice (WRO)',
-    lat: '51.1027',
-    lon: '16.8858',
-    address: { city: 'Wrocław' },
+    display_name: 'Sheraton Grand Krakow - Powisle 7, Krakow',
+    lat: '50.0598',
+    lon: '19.9442',
+    address: { city: 'Krakow', road: 'Powisle' },
     isCustom: true,
+    icon: 'hotel',
   },
   {
     place_id: -7,
-    display_name: 'Lotnisko Poznań-Ławica (POZ)',
-    lat: '52.4210',
-    lon: '16.8263',
-    address: { city: 'Poznań' },
+    display_name: 'Hotel Copernicus - Kanonicza 16, Krakow',
+    lat: '50.0543',
+    lon: '19.9363',
+    address: { city: 'Krakow', road: 'Kanonicza' },
     isCustom: true,
+    icon: 'hotel',
+  },
+  {
+    place_id: -8,
+    display_name: 'Radisson Blu Hotel - Straszewskiego 17, Krakow',
+    lat: '50.0631',
+    lon: '19.9311',
+    address: { city: 'Krakow', road: 'Straszewskiego' },
+    isCustom: true,
+    icon: 'hotel',
+  },
+  {
+    place_id: -9,
+    display_name: 'Grand Hotel - Slawkowska 5/7, Krakow',
+    lat: '50.0637',
+    lon: '19.9359',
+    address: { city: 'Kraków', road: 'Sławkowska' },
+    isCustom: true,
+    icon: 'hotel',
   },
 ];
 
@@ -97,16 +123,15 @@ export default function LocationAutocomplete({
 
   const searchAddress = async (query: string) => {
     if (query.length < 3) {
-      setSuggestions(POPULAR_AIRPORTS);
+      setSuggestions(POPULAR_LOCATIONS);
       return;
     }
 
     setIsLoading(true);
 
     try {
-      const matchingAirports = POPULAR_AIRPORTS.filter((airport) =>
-        airport.display_name.toLowerCase().includes(query.toLowerCase()) ||
-        query.toLowerCase().includes('lotnisk')
+      const matchingLocations = POPULAR_LOCATIONS.filter((location) =>
+        location.display_name.toLowerCase().includes(query.toLowerCase())
       );
 
       // Wyszukaj w Krakowie i okolicach używając bounding box
@@ -189,11 +214,11 @@ export default function LocationAutocomplete({
       });
 
       const finalResults = [
-        ...matchingAirports, 
+        ...matchingLocations, 
         ...sortedResults
       ];
 
-      setSuggestions(finalResults.slice(0, 8));
+      setSuggestions(finalResults.slice(0, 10));
     } catch (error) {
       console.error('Błąd wyszukiwania:', error);
       setSuggestions([]);
@@ -208,7 +233,7 @@ export default function LocationAutocomplete({
     setShowSuggestions(true);
 
     if (newValue.length < 3) {
-      setSuggestions(POPULAR_AIRPORTS);
+      setSuggestions(POPULAR_LOCATIONS);
       return;
     }
 
@@ -264,7 +289,7 @@ export default function LocationAutocomplete({
           onFocus={() => {
             setShowSuggestions(true);
             if (!value || value.length < 3) {
-              setSuggestions(POPULAR_AIRPORTS);
+              setSuggestions(POPULAR_LOCATIONS);
             }
           }}
           placeholder={placeholder}
@@ -279,24 +304,50 @@ export default function LocationAutocomplete({
         <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
           {suggestions.map((suggestion) => {
             const addr = formatAddress(suggestion);
-            const isAirport = suggestion.isCustom;
+            const isCustom = suggestion.isCustom;
+            const icon = suggestion.icon || 'location';
+            
+            // Determine icon component based on type
+            let IconComponent;
+            let iconColor = 'text-gray-400';
+            
+            if (isCustom) {
+              switch (icon) {
+                case 'airport':
+                  IconComponent = Plane;
+                  iconColor = 'text-blue-600';
+                  break;
+                case 'train':
+                  IconComponent = Train;
+                  iconColor = 'text-green-600';
+                  break;
+                case 'hotel':
+                  IconComponent = Hotel;
+                  iconColor = 'text-purple-600';
+                  break;
+                case 'location':
+                default:
+                  IconComponent = MapPin;
+                  iconColor = 'text-orange-600';
+                  break;
+              }
+            } else {
+              IconComponent = MapPin;
+              iconColor = 'text-gray-400';
+            }
             
             return (
               <button
                 key={suggestion.place_id}
                 onClick={() => handleSelectSuggestion(suggestion)}
                 className={`w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors border-b border-gray-100 last:border-0 ${
-                  isAirport ? 'bg-blue-50/50' : ''
+                  isCustom ? 'bg-blue-50/50' : ''
                 }`}
               >
                 <div className="flex items-start gap-3">
-                  {isAirport ? (
-                    <Plane className="w-4 h-4 text-blue-600 mt-1 flex-shrink-0" />
-                  ) : (
-                    <MapPin className="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
-                  )}
+                  <IconComponent className={`w-4 h-4 ${iconColor} mt-1 flex-shrink-0`} />
                   <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-semibold ${isAirport ? 'text-blue-900' : 'text-gray-900'}`}>
+                    <p className={`text-sm font-semibold ${isCustom ? 'text-blue-900' : 'text-gray-900'}`}>
                       {addr.main}
                     </p>
                     {addr.details && (

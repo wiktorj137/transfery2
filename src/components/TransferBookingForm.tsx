@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -53,6 +54,12 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
   const [promoCodeError, setPromoCodeError] = useState('');
   const [promoCodeApplied, setPromoCodeApplied] = useState(false);
   const [discount, setDiscount] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Sprawdź czy komponent jest zamontowany (dla SSR)
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Formularz dla kroku 1
   const step1Form = useForm<Step1Data>({
@@ -165,13 +172,16 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
   useEffect(() => {
     if (currentStep === 2 || currentStep === 3) {
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
     } else {
       document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
     }
     
     // Cleanup przy unmount
     return () => {
       document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
     };
   }, [currentStep]);
 
@@ -407,8 +417,8 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
       )}
 
       {/* STEP 2 & 3 - Fullscreen Modal */}
-      {(currentStep === 2 || currentStep === 3) && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center overflow-y-auto animate-fadeIn">
+      {(currentStep === 2 || currentStep === 3) && isMounted && createPortal(
+        <div className="booking-modal-overlay fixed inset-0 bg-black/50 z-[9999] flex items-start justify-center overflow-y-auto animate-fadeIn">
           <div className="min-h-screen w-full bg-white md:m-4 md:rounded-2xl md:shadow-2xl md:max-w-6xl animate-slideUp">
             {/* Close button */}
             <div className="sticky top-0 bg-white z-10 border-b border-gray-200 px-4 md:px-8 py-4 flex items-center justify-between md:rounded-t-2xl">
@@ -799,6 +809,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             </div>
           </div>
         </div>
+        ,document.body
       )}
     </>
   );
