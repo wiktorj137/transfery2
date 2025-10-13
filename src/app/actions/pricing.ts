@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { calculateDistance } from '@/lib/utils';
 import { PRICING } from '@/constants/pricing';
 import { getVehicleMultiplier } from '@/constants/vehicles';
-import type { PriceCalculation, Coordinates } from '@/types';
+import type { PriceCalculation } from '@/types';
 
 /**
  * Server Action: Calculate transfer price
@@ -62,10 +62,11 @@ export async function calculatePriceAction(
     }
 
     // Calculate total before discount
-    let totalBeforeDiscount = (basePrice + vehicleUpcharge) * surchargeMultiplier;
+    const totalBeforeDiscount = (basePrice + vehicleUpcharge) * surchargeMultiplier;
 
     // Apply promo code discount (if valid)
     let discount = 0;
+    
     if (validated.promoCode) {
       const promoResult = await validatePromoCodeAction(
         validated.promoCode,

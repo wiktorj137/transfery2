@@ -40,6 +40,7 @@ export function formatDateTime(date: Date, locale: string = 'pl-PL'): string {
 /**
  * Debounce function for search inputs
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number

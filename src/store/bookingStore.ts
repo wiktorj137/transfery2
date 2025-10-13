@@ -112,6 +112,12 @@ export const useBookingStore = create<BookingStore>()(
         finalPrice: state.finalPrice,
         currentStep: state.currentStep,
       }),
+      // Custom serialization/deserialization for Date objects
+      onRehydrateStorage: () => (state) => {
+        if (state && state.date && typeof state.date === 'string') {
+          state.date = new Date(state.date);
+        }
+      },
     }
   )
 );
