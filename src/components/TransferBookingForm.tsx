@@ -300,116 +300,163 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
       {/* STEP 1 - Normal form */}
       {currentStep === 1 && (
         <div className="w-full bg-transparent">
-          {/* Progress bar */}
-          <div className="mb-6 sm:mb-8">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs sm:text-sm font-medium text-gray-700">Step 1 of 3</span>
-              <span className="text-xs sm:text-sm text-gray-500">Transfer Details</span>
-            </div>
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-blue-600 transition-all duration-300"
-                style={{ width: '33.33%' }}
-              />
-            </div>
-          </div>
-
-          <form onSubmit={handleStep1Submit} className="space-y-4 sm:space-y-6">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Transfer Details
-            </h2>
-
-          {/* Locations */}
-          <div className="grid md:grid-cols-2 gap-4 w-full">
-            <div className="w-full min-w-0">
-              <LocationAutocomplete
-                value={pickup || ''}
-                onChange={(value, coords) => {
-                  step1Form.setValue('pickup', value);
-                  if (coords) {
-                    setPickupCoords(coords);
-                  }
-                }}
-                label="Pickup Location"
-                placeholder="e.g. Krakow Airport"
-              />
-              {step1Form.formState.errors.pickup && (
-                <p className="text-red-500 text-sm mt-1">
-                  {step1Form.formState.errors.pickup.message}
-                </p>
-              )}
-            </div>
-
-            <div className="w-full min-w-0">
-              <LocationAutocomplete
-                value={dropoff || ''}
-                onChange={(value, coords) => {
-                  step1Form.setValue('dropoff', value);
-                  if (coords) {
-                    setDropoffCoords(coords);
-                  }
-                }}
-                label="Drop-off Location"
-                placeholder="e.g. Main Square, Krakow"
-              />
-              {step1Form.formState.errors.dropoff && (
-                <p className="text-red-500 text-sm mt-1">
-                  {step1Form.formState.errors.dropoff.message}
-                </p>
-              )}
+          {/* Progress bar - Custom Stepper */}
+          <div className="mb-4 sm:mb-5">
+            <div className="flex items-center justify-between">
+              {/* Step 1 */}
+              <div className="flex flex-col items-center flex-1">
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all ${currentStep >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+                  {currentStep > 1 ? <Check className="w-4 h-4" /> : '1'}
+                </div>
+                <span className={`text-xs mt-1.5 ${currentStep >= 1 ? 'font-semibold text-gray-900' : 'text-gray-500'}`}>Route</span>
+              </div>
+              
+              {/* Connector 1-2 */}
+              <div className={`flex-1 h-1 mx-1.5 sm:mx-2 rounded-full transition-all ${currentStep > 1 ? 'bg-blue-300' : 'bg-gray-300'}`}></div>
+              
+              {/* Step 2 */}
+              <div className="flex flex-col items-center flex-1">
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all ${currentStep >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+                  {currentStep > 2 ? <Check className="w-4 h-4" /> : '2'}
+                </div>
+                <span className={`text-xs mt-1.5 ${currentStep >= 2 ? 'font-semibold text-gray-900' : 'text-gray-500'}`}>Vehicle</span>
+              </div>
+              
+              {/* Connector 2-3 */}
+              <div className={`flex-1 h-1 mx-1.5 sm:mx-2 rounded-full transition-all ${currentStep > 2 ? 'bg-blue-300' : 'bg-gray-300'}`}></div>
+              
+              {/* Step 3 */}
+              <div className="flex flex-col items-center flex-1">
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all ${currentStep >= 3 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+                  3
+                </div>
+                <span className={`text-xs mt-1.5 ${currentStep >= 3 ? 'font-semibold text-gray-900' : 'text-gray-500'}`}>Payment</span>
+              </div>
             </div>
           </div>
 
-          {/* Date/Time and Passengers */}
-          <div className="grid md:grid-cols-2 gap-4 w-full">
+          <form onSubmit={handleStep1Submit} className="space-y-3 sm:space-y-4">
+          {/* From Location */}
+          <div className="w-full">
+            <LocationAutocomplete
+              value={pickup || ''}
+              onChange={(value, coords) => {
+                step1Form.setValue('pickup', value);
+                if (coords) {
+                  setPickupCoords(coords);
+                }
+              }}
+              label=""
+              placeholder="From: Airport, Hotel, Address..."
+            />
+            {step1Form.formState.errors.pickup && (
+              <p className="text-red-500 text-sm mt-1">
+                {step1Form.formState.errors.pickup.message}
+              </p>
+            )}
+          </div>
+
+          {/* To Location */}
+          <div className="w-full">
+            <LocationAutocomplete
+              value={dropoff || ''}
+              onChange={(value, coords) => {
+                step1Form.setValue('dropoff', value);
+                if (coords) {
+                  setDropoffCoords(coords);
+                }
+              }}
+              label=""
+              placeholder="To: City Center, Hotel, Address..."
+            />
+            {step1Form.formState.errors.dropoff && (
+              <p className="text-red-500 text-sm mt-1">
+                {step1Form.formState.errors.dropoff.message}
+              </p>
+            )}
+          </div>
+
+          {/* Date and Time - separated into two fields side by side */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full">
+            {/* Date */}
             <div className="w-full min-w-0">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Pickup Date and Time
-              </label>
               <div className="relative w-full">
-                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
                 <input
-                  type="datetime-local"
+                  type="date"
                   {...step1Form.register('date', {
-                    setValueAs: (value) => value ? new Date(value) : undefined,
+                    setValueAs: (value) => value ? new Date(value + 'T12:00:00') : undefined,
                   })}
-                  min={new Date().toISOString().slice(0, 16)}
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition box-border"
+                  min={new Date().toISOString().slice(0, 10)}
+                  className="w-full pl-10 sm:pl-11 pr-2 sm:pr-3 py-3 sm:py-3.5 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                  style={{ 
+                    fontSize: '16px',
+                    WebkitAppearance: 'none',
+                    appearance: 'none',
+                    minHeight: '44px'
+                  }}
                 />
               </div>
               {step1Form.formState.errors.date && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-red-500 text-xs sm:text-sm mt-1">
                   {step1Form.formState.errors.date.message}
                 </p>
               )}
             </div>
 
+            {/* Time */}
             <div className="w-full min-w-0">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Number of Passengers
-              </label>
               <div className="relative w-full">
-                <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <select
-                  {...step1Form.register('passengers', { valueAsNumber: true })}
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition appearance-none bg-white box-border"
-                >
-                  {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                    <option key={num} value={num}>
-                      {num} {num === 1 ? 'person' : 'people'}
-                    </option>
-                  ))}
-                </select>
+                <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <input
+                  type="time"
+                  defaultValue="12:00"
+                  className="w-full pl-10 sm:pl-11 pr-2 sm:pr-3 py-3 sm:py-3.5 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                  style={{ 
+                    fontSize: '16px',
+                    WebkitAppearance: 'none',
+                    appearance: 'none',
+                    minHeight: '44px'
+                  }}
+                />
               </div>
             </div>
           </div>
 
-          {/* Submit */}
+          {/* Number of People */}
+          <div className="w-full">
+            <div className="relative w-full">
+              <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
+              <select
+                {...step1Form.register('passengers', { valueAsNumber: true })}
+                className="w-full pl-10 sm:pl-11 pr-8 sm:pr-10 py-3 sm:py-3.5 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition appearance-none cursor-pointer"
+                style={{ 
+                  fontSize: '16px',
+                  WebkitAppearance: 'none',
+                  appearance: 'none',
+                  minHeight: '44px'
+                }}
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                  <option key={num} value={num}>
+                    {num} {num === 1 ? 'Person' : 'People'}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+            className="w-full bg-blue-600 text-white font-bold py-3 sm:py-3.5 px-6 rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl text-base sm:text-lg min-h-[48px]"
           >
-            Continue
+            <span>Continue</span>
             <ArrowRight className="w-5 h-5" />
           </button>
         </form>
@@ -438,20 +485,38 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               </button>
             </div>
 
-            {/* Progress bar */}
+            {/* Progress bar - Custom Stepper */}
             <div className="px-4 md:px-8 py-4 border-b border-gray-200">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700">Step {currentStep} of 3</span>
-                <span className="text-sm text-gray-500">
-                  {currentStep === 2 && 'Vehicle Selection'}
-                  {currentStep === 3 && 'Details & Payment'}
-                </span>
-              </div>
-              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-blue-600 transition-all duration-300"
-                  style={{ width: `${(currentStep / 3) * 100}%` }}
-                />
+              <div className="flex items-center justify-between max-w-md mx-auto">
+                {/* Step 1 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${currentStep >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+                    {currentStep > 1 ? <Check className="w-5 h-5" /> : '1'}
+                  </div>
+                  <span className={`text-xs sm:text-sm mt-2 ${currentStep >= 1 ? 'font-semibold text-gray-900' : 'text-gray-500'}`}>Route</span>
+                </div>
+                
+                {/* Connector 1-2 */}
+                <div className={`flex-1 h-1 mx-2 rounded-full transition-all ${currentStep > 1 ? 'bg-blue-300' : 'bg-gray-300'}`}></div>
+                
+                {/* Step 2 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${currentStep >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+                    {currentStep > 2 ? <Check className="w-5 h-5" /> : '2'}
+                  </div>
+                  <span className={`text-xs sm:text-sm mt-2 ${currentStep >= 2 ? 'font-semibold text-gray-900' : 'text-gray-500'}`}>Vehicle</span>
+                </div>
+                
+                {/* Connector 2-3 */}
+                <div className={`flex-1 h-1 mx-2 rounded-full transition-all ${currentStep > 2 ? 'bg-blue-300' : 'bg-gray-300'}`}></div>
+                
+                {/* Step 3 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${currentStep >= 3 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+                    3
+                  </div>
+                  <span className={`text-xs sm:text-sm mt-2 ${currentStep >= 3 ? 'font-semibold text-gray-900' : 'text-gray-500'}`}>Payment</span>
+                </div>
               </div>
             </div>
 
@@ -480,14 +545,20 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
                   }}
                   placeholder="e.g. PROMO10"
                   disabled={promoCodeApplied}
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
+                  className="w-full pl-11 pr-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
+                  style={{ 
+                    fontSize: '16px',
+                    WebkitAppearance: 'none',
+                    appearance: 'none',
+                    minHeight: '48px'
+                  }}
                 />
               </div>
               <button
                 type="button"
                 onClick={handleApplyPromoCode}
                 disabled={promoCodeApplied}
-                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed min-h-[48px]"
               >
                 {promoCodeApplied ? <Check className="w-5 h-5" /> : 'Apply'}
               </button>
@@ -649,8 +720,14 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               <input
                 type="text"
                 {...step3Form.register('firstName')}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 placeholder="John"
+                style={{ 
+                  fontSize: '16px',
+                  WebkitAppearance: 'none',
+                  appearance: 'none',
+                  minHeight: '48px'
+                }}
               />
               {step3Form.formState.errors.firstName && (
                 <p className="text-red-500 text-sm mt-1">
@@ -666,8 +743,14 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               <input
                 type="text"
                 {...step3Form.register('lastName')}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 placeholder="Smith"
+                style={{ 
+                  fontSize: '16px',
+                  WebkitAppearance: 'none',
+                  appearance: 'none',
+                  minHeight: '48px'
+                }}
               />
               {step3Form.formState.errors.lastName && (
                 <p className="text-red-500 text-sm mt-1">
@@ -683,8 +766,14 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               <input
                 type="email"
                 {...step3Form.register('email')}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 placeholder="john.smith@email.com"
+                style={{ 
+                  fontSize: '16px',
+                  WebkitAppearance: 'none',
+                  appearance: 'none',
+                  minHeight: '48px'
+                }}
               />
               {step3Form.formState.errors.email && (
                 <p className="text-red-500 text-sm mt-1">
@@ -700,8 +789,14 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               <input
                 type="tel"
                 {...step3Form.register('phone')}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 placeholder="+48 123 456 789"
+                style={{ 
+                  fontSize: '16px',
+                  WebkitAppearance: 'none',
+                  appearance: 'none',
+                  minHeight: '48px'
+                }}
               />
               {step3Form.formState.errors.phone && (
                 <p className="text-red-500 text-sm mt-1">

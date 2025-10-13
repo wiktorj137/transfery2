@@ -479,12 +479,6 @@ export default function DestinationBookingPage() {
             <div className="lg:col-span-1">
               <div className="sticky top-24">
                 <div className="bg-white rounded-2xl shadow-xl border border-gray-200">
-                  {/* Header */}
-                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
-                    <h3 className="text-2xl font-bold mb-2">Book Your Transfer</h3>
-                    <p className="text-blue-100 text-sm">Quick and easy booking process</p>
-                  </div>
-                  
                   {/* Form with padding */}
                   <div className="p-4 sm:p-6">
                     <TransferBookingForm />

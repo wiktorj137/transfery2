@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* Safari/WebKit specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* This only applies to iOS Safari */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
 :root {
   --background: #f9fafb;
   --foreground: #171717;
@@ -33,14 +49,158 @@ input[type="time"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  font-size: 16px !important; /* Prevents iOS zoom on focus */
+  min-height: 44px; /* iOS minimum touch target */
 }
 
 /* Ensure all form inputs respect their containers on mobile */
 input,
 select,
 textarea {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
   max-width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: 16px !important; /* Prevents iOS zoom on focus */
+  min-height: 44px; /* iOS minimum touch target */
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* iOS Safari specific fixes */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="search"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0 !important;
+}
+
+/* Fix iOS Safari input styling */
+input:focus,
+select:focus,
+textarea:focus {
+  font-size: 16px !important; /* Prevents zoom on focus in iOS Safari */
+  outline: none;
+}
+
+/* Prevent iOS from adding automatic styling */
+input,
+select,
+textarea,
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Fix for iOS Safari rounded corners - reset first */
+input,
+select,
+textarea {
+  border-radius: 0 !important;
+}
+
+/* Then override with our custom rounded styles */
+input.rounded-xl,
+select.rounded-xl,
+textarea.rounded-xl,
+.rounded-xl > input,
+.rounded-xl > select,
+.rounded-xl > textarea {
+  border-radius: 0.75rem !important;
+  -webkit-border-radius: 0.75rem !important;
+}
+
+input.rounded-lg,
+select.rounded-lg,
+textarea.rounded-lg,
+.rounded-lg > input,
+.rounded-lg > select,
+.rounded-lg > textarea {
+  border-radius: 0.5rem !important;
+  -webkit-border-radius: 0.5rem !important;
+}
+
+.rounded-full {
+  border-radius: 9999px !important;
+  -webkit-border-radius: 9999px !important;
+}
+
+/* Fix iOS safe area issues */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+/* Fix iOS Safari flexbox issues */
+.flex {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+}
+
+/* Prevent iOS text size adjustment */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Fix iOS Safari modal overlay issues */
+.booking-modal-overlay {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* iOS button fix */
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+/* Fix for grid layout on iOS */
+.grid {
+  display: grid;
+}
+
+/* Ensure proper spacing on mobile */
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+  
+  /* Make sure inputs are properly sized */
+  .w-full {
+    width: 100% !important;
+  }
+  
+  /* Fix for datetime input on very small screens */
+  input[type="datetime-local"] {
+    padding-left: 2.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* Better touch targets for iOS */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  input,
+  select,
+  textarea,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 /* Modal animations */

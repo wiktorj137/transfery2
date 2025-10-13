@@ -9,23 +9,23 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3">
           <div className="flex items-center justify-between gap-2 sm:gap-4">
-            <Link href="/" className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity flex-shrink min-w-0">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg flex-shrink-0">
-                <Plane className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity flex-shrink min-w-0">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg flex-shrink-0">
+                <Plane className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
               <div className="min-w-0">
-                <h1 className="text-base sm:text-xl lg:text-2xl font-bold text-gray-900 truncate">Krakow Transfer</h1>
-                <p className="text-xs text-gray-500 hidden md:block">Airport & City Transfers</p>
+                <h1 className="text-sm sm:text-lg lg:text-xl font-bold text-gray-900 truncate">Krakow Transfer</h1>
+                <p className="text-xs text-gray-500 hidden lg:block">Airport & City Transfers</p>
               </div>
             </Link>
             <a 
               href="tel:+48123456789"
-              className="group flex items-center gap-1.5 sm:gap-2 border-2 border-blue-600 text-blue-600 px-2 py-2 sm:px-5 sm:py-2.5 rounded-xl font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md flex-shrink-0"
+              className="group flex items-center gap-1 sm:gap-1.5 border-2 border-blue-600 text-blue-600 px-2 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md flex-shrink-0"
             >
-              <Phone className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0" />
-              <span className="text-xs sm:text-sm lg:text-base font-bold whitespace-nowrap">+48 123 456 789</span>
+              <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0" />
+              <span className="text-xs sm:text-sm font-bold whitespace-nowrap">+48 123 456 789</span>
             </a>
           </div>
         </div>
@@ -41,78 +41,23 @@ export default function Home() {
           }}></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-16 sm:pb-24">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-32 xl:pb-40">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start lg:items-center">
             {/* Left Column - Hero Content */}
             <div className="text-white text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-                <Star className="w-4 h-4 text-yellow-300 fill-yellow-300" />
-                <span className="text-sm font-medium">Rated 4.9/5 by 500+ customers</span>
-              </div>
-
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
                 Airport Transfers
                 <span className="block text-blue-200 mt-2">Krakow</span>
               </h2>
               
-              <p className="text-lg sm:text-xl text-blue-100 mb-8 max-w-xl mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0">
                 Professional transport to and from the airport. Comfortable, safe, on time.
               </p>
-
-              {/* Features Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-4 mb-8">
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                  <Clock className="w-8 h-8 text-blue-200 mb-2 mx-auto lg:mx-0" />
-                  <p className="text-sm font-semibold">24/7 Service</p>
-                  <p className="text-xs text-blue-200 mt-1">Always available</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                  <Shield className="w-8 h-8 text-blue-200 mb-2 mx-auto lg:mx-0" />
-                  <p className="text-sm font-semibold">Safe & Secure</p>
-                  <p className="text-xs text-blue-200 mt-1">Licensed drivers</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                  <Star className="w-8 h-8 text-blue-200 mb-2 mx-auto lg:mx-0" />
-                  <p className="text-sm font-semibold">Premium Quality</p>
-                  <p className="text-xs text-blue-200 mt-1">Modern vehicles</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                  <Plane className="w-8 h-8 text-blue-200 mb-2 mx-auto lg:mx-0" />
-                  <p className="text-sm font-semibold">Airport Specialist</p>
-                  <p className="text-xs text-blue-200 mt-1">Flight tracking</p>
-                </div>
-              </div>
-
-              {/* Trust Badges */}
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start text-sm text-blue-100">
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                  </svg>
-                  <span>Free cancellation</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                  </svg>
-                  <span>No hidden fees</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                  </svg>
-                  <span>Instant confirmation</span>
-                </div>
-              </div>
             </div>
 
             {/* Right Column - Booking Form */}
-            <div className="lg:pl-8" id="booking-form">
-              <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Book Your Transfer</h3>
-                  <p className="text-gray-600">Get instant price and confirmation</p>
-                </div>
+            <div className="lg:pl-8 mb-8 lg:mb-12" id="booking-form">
+              <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8">
                 <TransferBookingForm />
               </div>
             </div>

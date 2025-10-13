@@ -281,7 +281,7 @@ export default function LocationAutocomplete({
       )}
       
       <div className="relative">
-        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
         <input
           type="text"
           value={value}
@@ -293,7 +293,13 @@ export default function LocationAutocomplete({
             }
           }}
           placeholder={placeholder}
-          className="w-full pl-11 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+          className="w-full pl-11 pr-10 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white"
+          style={{ 
+            fontSize: '16px',
+            WebkitAppearance: 'none',
+            appearance: 'none',
+            minHeight: '48px'
+          }}
         />
         {isLoading && (
           <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-blue-600 animate-spin" />
