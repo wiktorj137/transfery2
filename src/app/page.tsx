@@ -72,63 +72,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SEO Content Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-              Professional Airport Transfer Service in Krakow
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8 text-gray-600">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">Why Choose Our Service?</h3>
-                <p className="mb-4">
-                  We provide reliable airport transfer services in Krakow with professional drivers and modern vehicles. 
-                  Whether you&apos;re arriving at Krakow Airport (KRK) or need transportation to the city center, 
-                  we ensure a comfortable and punctual journey.
-                </p>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">✓</span>
-                    <span>Door-to-door service from/to Krakow Airport</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">✓</span>
-                    <span>Flight tracking for pickup timing</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">✓</span>
-                    <span>Meet & greet service available</span>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">Our Coverage</h3>
-                <p className="mb-4">
-                  We operate throughout Krakow and surrounding areas, offering transfers to popular destinations 
-                  including the Old Town, Kazimierz district, business centers, and hotels. 
-                  Our service extends to nearby cities like Katowice, Warsaw, and Wroclaw.
-                </p>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">✓</span>
-                    <span>Krakow city center transfers</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">✓</span>
-                    <span>Long-distance transfers to other cities</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">✓</span>
-                    <span>Tours to Auschwitz, Wieliczka, Zakopane</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Organized Tours Section */}
       <section id="destinations" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
@@ -185,433 +128,253 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="destinations" className="py-20 px-4 bg-gradient-to-b from-white to-gray-50 scroll-mt-20">
+      <section id="destinations" className="py-12 px-4 bg-gradient-to-b from-white to-gray-50 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Discover Poland from Kraków
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+              Popular Destinations from Kraków
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Book comfortable private transfers to Poland&apos;s most iconic destinations. 
-              Professional drivers, fixed prices, door-to-door service.
+            <p className="text-base text-gray-600 max-w-2xl mx-auto">
+              Book your transfer to top attractions
             </p>
           </div>
 
-          {/* Featured Destinations - Large Cards */}
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {/* All Destinations - Compact Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
             {/* Auschwitz-Birkenau */}
-            <div className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"></div>
-              <img 
-                src="/images/Auschwitz-Birkenau.jpg" 
-                alt="Auschwitz-Birkenau Memorial"
-                className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    MOST VISITED
-                  </span>
-                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    UNESCO Site
-                  </span>
+            <Link href="/book/auschwitz-birkenau" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
+                  <img 
+                    src="/images/Auschwitz-Birkenau.jpg" 
+                    alt="Auschwitz-Birkenau"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-2">Auschwitz-Birkenau Memorial</h3>
-                <p className="text-gray-200 text-sm mb-4">
-                  Visit the world&apos;s most significant Holocaust memorial and museum. 
-                  A powerful and moving experience that should not be missed.
-                </p>
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-white/80 text-sm">From Kraków</p>
-                    <p className="text-white text-3xl font-bold">150 PLN</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-white/80 text-sm">70 km • 1h 20min</p>
-                    <p className="text-white/60 text-xs mt-1">Oświęcim</p>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Auschwitz-Birkenau</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">150 PLN</span>
+                    <span className="text-xs text-gray-500">70 km</span>
                   </div>
                 </div>
-                <Link href="/book/auschwitz-birkenau">
-                  <button className="w-full bg-white text-gray-900 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
-                    Book Transfer
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </Link>
               </div>
-            </div>
+            </Link>
 
             {/* Wieliczka Salt Mine */}
-            <div className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"></div>
-              <img 
-                src="/images/wieliczka-salt-mine.jpg" 
-                alt="Wieliczka Salt Mine"
-                className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    UNESCO Site
-                  </span>
-                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    Underground Wonder
-                  </span>
+            <Link href="/book/wieliczka-salt-mine" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
+                  <img 
+                    src="/images/wieliczka-salt-mine.jpg" 
+                    alt="Wieliczka Salt Mine"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-2">Wieliczka Salt Mine</h3>
-                <p className="text-gray-200 text-sm mb-4">
-                  Explore 700-year-old underground chambers, chapels carved from salt, 
-                  and stunning underground lakes 135m below ground.
-                </p>
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-white/80 text-sm">From Kraków</p>
-                    <p className="text-white text-3xl font-bold">100 PLN</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-white/80 text-sm">15 km • 30min</p>
-                    <p className="text-white/60 text-xs mt-1">Wieliczka</p>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Wieliczka Salt Mine</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">100 PLN</span>
+                    <span className="text-xs text-gray-500">15 km</span>
                   </div>
                 </div>
-                <Link href="/book/wieliczka-salt-mine">
-                  <button className="w-full bg-white text-gray-900 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
-                    Book Transfer
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </Link>
               </div>
-            </div>
-          </div>
+            </Link>
 
-          {/* Mountain Destinations */}
-          <div className="mb-16">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <span className="text-2xl">🏔️</span>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900">Mountain Adventures</h3>
-                <p className="text-gray-600 text-sm">Breathtaking nature and outdoor activities</p>
-              </div>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Zakopane */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative h-48 overflow-hidden">
+            {/* Zakopane & Tatra Mountains */}
+            <Link href="/book/zakopane" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
                   <img 
                     src="/images/zakopane-tatry.jpg" 
-                    alt="Zakopane - Tatra Mountains"
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    alt="Zakopane"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute top-3 right-3">
-                    <span className="bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                      ⛷️ Winter Resort
-                    </span>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
-                <div className="p-6">
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">Zakopane & Tatra Mountains</h4>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Poland&apos;s winter capital. Skiing, hiking, traditional highland culture, and stunning mountain views.
-                  </p>
-                  <div className="flex justify-between items-end mb-4">
-                    <div>
-                      <p className="text-sm text-gray-500">From Kraków</p>
-                      <p className="text-2xl font-bold text-green-600">350 PLN</p>
-                    </div>
-                    <p className="text-sm text-gray-500">110 km • 2h</p>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Zakopane & Tatras</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">350 PLN</span>
+                    <span className="text-xs text-gray-500">110 km</span>
                   </div>
-                  <Link href="/book/zakopane">
-                    <button className="w-full bg-green-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
-                      Book Transfer
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </Link>
                 </div>
               </div>
+            </Link>
 
-              {/* Dunajec Rafting */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative h-48 overflow-hidden">
+            {/* Dunajec River Rafting */}
+            <Link href="/book/dunajec-rafting" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
                   <img 
                     src="/images/dunajec-river.jpg" 
-                    alt="Dunajec River Rafting"
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    alt="Dunajec River"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute top-3 right-3">
-                    <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                      🚣 Adventure
-                    </span>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
-                <div className="p-6">
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">Dunajec River Rafting</h4>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Traditional wooden raft trip through spectacular Pieniny Mountains gorge. Unforgettable scenic experience.
-                  </p>
-                  <div className="flex justify-between items-end mb-4">
-                    <div>
-                      <p className="text-sm text-gray-500">From Kraków</p>
-                      <p className="text-2xl font-bold text-green-600">280 PLN</p>
-                    </div>
-                    <p className="text-sm text-gray-500">100 km • 2h</p>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Dunajec River Rafting</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">280 PLN</span>
+                    <span className="text-xs text-gray-500">100 km</span>
                   </div>
-                  <Link href="/book/dunajec-rafting">
-                    <button className="w-full bg-green-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
-                      Book Transfer
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </Link>
                 </div>
               </div>
+            </Link>
 
-              {/* Ojców National Park */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative h-48 overflow-hidden">
+            {/* Ojców National Park */}
+            <Link href="/book/ojcow-national-park" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
                   <img 
                     src="/images/ojcow-park.jpg" 
                     alt="Ojców National Park"
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute top-3 right-3">
-                    <span className="bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                      🏰 Castle
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">Ojców National Park</h4>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Stunning limestone cliffs, caves, and Pieskowa Skała Castle. Poland&apos;s smallest but most beautiful park.
-                  </p>
-                  <div className="flex justify-between items-end mb-4">
-                    <div>
-                      <p className="text-sm text-gray-500">From Kraków</p>
-                      <p className="text-2xl font-bold text-green-600">120 PLN</p>
-                    </div>
-                    <p className="text-sm text-gray-500">30 km • 45min</p>
-                  </div>
-                  <Link href="/book/ojcow-national-park">
-                    <button className="w-full bg-green-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
-                      Book Transfer
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-16">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <span className="text-2xl">⛪</span>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900">Religious & Cultural Heritage</h3>
-                <p className="text-gray-600 text-sm">Sacred places and pilgrimage sites</p>
-              </div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Częstochowa */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="flex flex-col md:flex-row">
-                  <div className="relative h-48 md:h-auto md:w-1/2 overflow-hidden">
-                    <img 
-                      src="/images/czestochowa.jpg" 
-                      alt="Jasna Góra Monastery"
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="p-6 md:w-1/2 flex flex-col">
-                    <div className="mb-3">
-                      <span className="bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                        🙏 Pilgrimage Site
-                      </span>
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">Częstochowa - Jasna Góra</h4>
-                    <p className="text-gray-600 text-sm mb-4 flex-grow">
-                      Home of the Black Madonna icon. Poland&apos;s most important Catholic shrine, visited by millions annually.
-                    </p>
-                    <div className="flex justify-between items-end mb-4">
-                      <div>
-                        <p className="text-sm text-gray-500">From Kraków</p>
-                        <p className="text-2xl font-bold text-purple-600">280 PLN</p>
-                      </div>
-                      <p className="text-sm text-gray-500">130 km • 2h</p>
-                    </div>
-                    <Link href="/book/czestochowa">
-                      <button className="w-full bg-purple-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center gap-2">
-                        Book Transfer
-                        <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Wadowice */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="flex flex-col md:flex-row">
-                  <div className="relative h-48 md:h-auto md:w-1/2 overflow-hidden">
-                    <img 
-                      src="/images/wadowice.jpg" 
-                      alt="Wadowice - Pope John Paul II"
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="p-6 md:w-1/2 flex flex-col">
-                    <div className="mb-3">
-                      <span className="bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                        👑 Pope&apos;s Birthplace
-                      </span>
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">Wadowice</h4>
-                    <p className="text-gray-600 text-sm mb-4 flex-grow">
-                      Birthplace of Pope John Paul II. Visit his family home, now a museum, and the church where he was baptized.
-                    </p>
-                    <div className="flex justify-between items-end mb-4">
-                      <div>
-                        <p className="text-sm text-gray-500">From Kraków</p>
-                        <p className="text-2xl font-bold text-purple-600">140 PLN</p>
-                      </div>
-                      <p className="text-sm text-gray-500">50 km • 1h</p>
-                    </div>
-                    <Link href="/book/wadowice">
-                      <button className="w-full bg-purple-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center gap-2">
-                        Book Transfer
-                        <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Airport & City Transfers */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <Plane className="w-6 h-6 text-blue-600" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900">Airport & City Transfers</h3>
-                <p className="text-gray-600 text-sm">Comfortable door-to-door service</p>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {/* Kraków City Center */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                <div className="relative h-40 overflow-hidden">
-                  <img 
-                    src="/images/Krakow.jpg" 
-                    alt="Kraków City Center"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
-                <div className="p-5">
-                  <h4 className="text-base font-bold text-gray-900 mb-3">To Kraków City Center</h4>
-                  <div className="flex items-end justify-between mb-4">
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">From airport</p>
-                      <p className="text-2xl font-bold text-blue-600">80 PLN</p>
-                    </div>
-                    <p className="text-xs text-gray-500">20 km<br/>25min</p>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Ojców National Park</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">120 PLN</span>
+                    <span className="text-xs text-gray-500">30 km</span>
                   </div>
-                  <Link href="/book/krakow">
-                    <button className="w-full bg-blue-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                      Book Transfer
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </Link>
                 </div>
               </div>
+            </Link>
 
-              {/* Katowice */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                <div className="relative h-40 overflow-hidden">
+            {/* Częstochowa - Jasna Góra */}
+            <Link href="/book/czestochowa" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
+                  <img 
+                    src="/images/czestochowa.jpg" 
+                    alt="Częstochowa"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Częstochowa</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">280 PLN</span>
+                    <span className="text-xs text-gray-500">130 km</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Wadowice */}
+            <Link href="/book/wadowice" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
+                  <img 
+                    src="/images/wadowice.jpg" 
+                    alt="Wadowice"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Wadowice</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">140 PLN</span>
+                    <span className="text-xs text-gray-500">50 km</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Kraków City Center */}
+            <Link href="/book/krakow" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
+                  <img 
+                    src="/images/Krakow.jpg" 
+                    alt="Kraków"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Kraków City Center</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">80 PLN</span>
+                    <span className="text-xs text-gray-500">20 km</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Katowice */}
+            <Link href="/book/katowice" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
                   <img 
                     src="/images/Katowice.jpg" 
                     alt="Katowice"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
-                <div className="p-5">
-                  <h4 className="text-base font-bold text-gray-900 mb-3">To Katowice</h4>
-                  <div className="flex items-end justify-between mb-4">
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">From Kraków</p>
-                      <p className="text-2xl font-bold text-blue-600">200 PLN</p>
-                    </div>
-                    <p className="text-xs text-gray-500">80 km<br/>1.5h</p>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Katowice</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">200 PLN</span>
+                    <span className="text-xs text-gray-500">80 km</span>
                   </div>
-                  <Link href="/book/katowice">
-                    <button className="w-full bg-blue-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                      Book Transfer
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </Link>
                 </div>
               </div>
+            </Link>
 
-              {/* Warsaw */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                <div className="relative h-40 overflow-hidden">
+            {/* Warsaw */}
+            <Link href="/book/warsaw" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
                   <img 
                     src="/images/Warsaw.jpg" 
                     alt="Warsaw"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
-                <div className="p-5">
-                  <h4 className="text-base font-bold text-gray-900 mb-3">To Warsaw</h4>
-                  <div className="flex items-end justify-between mb-4">
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">From Kraków</p>
-                      <p className="text-2xl font-bold text-blue-600">650 PLN</p>
-                    </div>
-                    <p className="text-xs text-gray-500">300 km<br/>3h</p>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Warsaw</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">600 PLN</span>
+                    <span className="text-xs text-gray-500">300 km</span>
                   </div>
-                  <Link href="/book/warsaw">
-                    <button className="w-full bg-blue-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                      Book Transfer
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </Link>
                 </div>
               </div>
+            </Link>
 
-              {/* Wrocław */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                <div className="relative h-40 overflow-hidden">
+            {/* Wrocław */}
+            <Link href="/book/wroclaw" className="group">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-32 overflow-hidden">
                   <img 
                     src="/images/Wroclaw.jpg" 
                     alt="Wrocław"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
-                <div className="p-5">
-                  <h4 className="text-base font-bold text-gray-900 mb-3">To Wrocław</h4>
-                  <div className="flex items-end justify-between mb-4">
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">From Kraków</p>
-                      <p className="text-2xl font-bold text-blue-600">550 PLN</p>
-                    </div>
-                    <p className="text-xs text-gray-500">270 km<br/>3h</p>
+                <div className="p-3">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Wrocław</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-blue-600 font-bold text-lg">550 PLN</span>
+                    <span className="text-xs text-gray-500">270 km</span>
                   </div>
-                  <Link href="/book/wroclaw">
-                    <button className="w-full bg-blue-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                      Book Transfer
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </Link>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
 
           {/* CTA Section - Improved Design */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl shadow-2xl border border-blue-500">
+          <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl shadow-2xl border border-blue-500 mt-12">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
               <div className="absolute inset-0" style={{
@@ -645,25 +408,63 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              <div className="flex flex-wrap justify-center gap-4 mb-6">
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-5 py-3 rounded-lg border border-white/20">
-                  <Shield className="w-5 h-5 text-white" />
-                  <span className="text-sm font-semibold text-white">Licensed Drivers</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-5 py-3 rounded-lg border border-white/20">
-                  <Star className="w-5 h-5 text-white" />
-                  <span className="text-sm font-semibold text-white">Premium Vehicles</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-5 py-3 rounded-lg border border-white/20">
-                  <Clock className="w-5 h-5 text-white" />
-                  <span className="text-sm font-semibold text-white">24/7 Available</span>
-                </div>
+      {/* SEO Content Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="prose prose-lg max-w-none">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+              Professional Airport Transfer Service in Krakow
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8 text-gray-600">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Why Choose Our Service?</h3>
+                <p className="mb-4">
+                  We provide reliable airport transfer services in Krakow with professional drivers and modern vehicles. 
+                  Whether you&apos;re arriving at Krakow Airport (KRK) or need transportation to the city center, 
+                  we ensure a comfortable and punctual journey.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <span>Door-to-door service from/to Krakow Airport</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <span>Flight tracking for pickup timing</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <span>Meet & greet service available</span>
+                  </li>
+                </ul>
               </div>
-
-              <p className="text-sm text-blue-200">
-                * Prices shown are for Standard vehicle (1-4 passengers). Premium, Van, and VIP options available.
-              </p>
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Our Coverage</h3>
+                <p className="mb-4">
+                  We operate throughout Krakow and surrounding areas, offering transfers to popular destinations 
+                  including the Old Town, Kazimierz district, business centers, and hotels. 
+                  Our service extends to nearby cities like Katowice, Warsaw, and Wroclaw.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <span>Krakow city center transfers</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <span>Long-distance transfers to other cities</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <span>Tours to Auschwitz, Wieliczka, Zakopane</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
