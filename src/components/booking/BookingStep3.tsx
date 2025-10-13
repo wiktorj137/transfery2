@@ -5,7 +5,6 @@ import { CreditCard, Banknote, Check, Loader2 } from 'lucide-react';
 import { useBookingStore } from '@/store/bookingStore';
 import { submitBookingAction } from '@/app/actions/booking';
 import { formatPrice } from '@/lib/utils';
-import type { PaymentMethod } from '@/types';
 
 /**
  * Booking Step 3: Personal Details & Payment
@@ -84,7 +83,7 @@ export const BookingStep3 = memo(function BookingStep3({
       } else {
         setError(result.error || 'Failed to submit booking');
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setIsSubmitting(false);

@@ -47,7 +47,7 @@ export function usePromoCode(): UsePromoCodeReturn {
         setError(result.error || 'Failed to validate promo code');
         setIsValid(false);
       }
-    } catch (err) {
+    } catch {
       setError('Failed to validate promo code');
       setIsValid(false);
     } finally {

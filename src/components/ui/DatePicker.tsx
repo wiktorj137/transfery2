@@ -24,7 +24,6 @@ export const DatePicker = memo(function DatePicker({
   onChange,
   minDate,
   label = 'Date and Time',
-  placeholder = 'Select date and time',
   error,
   required = false,
 }: DatePickerProps) {

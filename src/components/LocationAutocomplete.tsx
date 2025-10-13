@@ -256,7 +256,6 @@ export default function LocationAutocomplete({
   };
 
   const formatAddress = (suggestion: NominatimResult) => {
-    const addr = suggestion.address;
     const displayParts = suggestion.display_name.split(', ');
     
     // Główna nazwa - pierwsza część (ulica, hotel, miejsce)

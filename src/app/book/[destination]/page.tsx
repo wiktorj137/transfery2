@@ -3,7 +3,7 @@
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, MapPin, Clock, Star, CheckCircle } from 'lucide-react';
 import TransferBookingForm from '@/components/TransferBookingForm';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 // Dane o destynacjach
 const destinations = {

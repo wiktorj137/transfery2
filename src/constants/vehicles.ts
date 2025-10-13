@@ -3,7 +3,6 @@
  */
 
 import { Vehicle } from '@/types';
-import { Car, Crown, Users, Sparkles } from 'lucide-react';
 
 export const VEHICLES: Record<string, Vehicle> = {
   standard: {

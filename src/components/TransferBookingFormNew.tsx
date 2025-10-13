@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { useBookingStore } from '@/store/bookingStore';
 import { StepIndicator } from '@/components/ui/StepIndicator';
 import { BookingStep1 } from '@/components/booking/BookingStep1';
@@ -31,7 +30,7 @@ const STEPS = [
 ];
 
 export default function TransferBookingForm() {
-  const { currentStep, setStep, nextStep, prevStep, reset } = useBookingStore();
+  const { currentStep, nextStep, prevStep, reset } = useBookingStore();
 
   const handleComplete = () => {
     // Show success message

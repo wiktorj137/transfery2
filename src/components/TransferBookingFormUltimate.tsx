@@ -138,7 +138,7 @@ export default function TransferBookingFormEnhanced() {
         setShowError(true);
         setTimeout(() => setShowError(false), 5000);
       }
-    } catch (error) {
+    } catch {
       setErrorMessage('An unexpected error occurred. Please try again.');
       setShowError(true);
       setTimeout(() => setShowError(false), 5000);

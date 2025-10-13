@@ -74,12 +74,13 @@ export async function getBookingAction(
   try {
     // In production: Fetch from database
     // For now: Return mock data
+    console.log('Fetching booking:', bookingId);
     
     return {
       success: false,
       error: 'Booking not found',
     };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       error: 'Failed to fetch booking',
@@ -106,7 +107,7 @@ export async function cancelBookingAction(
     console.log('🚫 Booking cancelled:', bookingId, reason);
 
     return { success: true };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       error: 'Failed to cancel booking',

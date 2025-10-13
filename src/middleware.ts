@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest) {
     } else {
       await rateLimiter.consume(clientIp);
     }
-  } catch (error) {
+  } catch {
     // Rate limit exceeded
     return new NextResponse('Too Many Requests', {
       status: 429,

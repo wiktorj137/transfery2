@@ -44,7 +44,7 @@ export function usePriceCalculation() {
             setError(result.error || 'Failed to calculate price');
           }
         }
-      } catch (err) {
+      } catch {
         if (!isCancelled) {
           setError('Failed to calculate price');
         }

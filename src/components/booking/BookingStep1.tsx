@@ -1,7 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-import { MapPin, Users } from 'lucide-react';
+import { Users } from 'lucide-react';
 import { useBookingStore } from '@/store/bookingStore';
 import LocationAutocomplete from '@/components/LocationAutocomplete';
 import { DatePicker } from '@/components/ui/DatePicker';

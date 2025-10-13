@@ -52,7 +52,7 @@ export function useLocationAutocomplete(
           setError(result.error || 'Failed to search locations');
           setResults([]);
         }
-      } catch (err) {
+      } catch {
         setError('Failed to search locations');
         setResults([]);
       } finally {
@@ -63,6 +63,7 @@ export function useLocationAutocomplete(
   );
 
   // Debounced search
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSearch = useCallback(
     debounce(searchLocations, debounceMs),
     [searchLocations, debounceMs]

@@ -166,7 +166,7 @@ export async function validatePromoCodeAction(
         message: `${promo.description} applied!`,
       },
     };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       error: 'Invalid promo code format',

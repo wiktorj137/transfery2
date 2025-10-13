@@ -91,7 +91,7 @@ export async function reverseGeocodeAction(
       success: true,
       data: result.display_name || 'Unknown location',
     };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       error: 'Failed to reverse geocode',
