@@ -306,7 +306,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               {/* Step 1 */}
               <div className="flex flex-col items-center flex-1">
                 <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all ${currentStep >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
-                  {currentStep > 1 ? <Check className="w-4 h-4" /> : '1'}
+                  1
                 </div>
                 <span className={`text-xs mt-1.5 ${currentStep >= 1 ? 'font-semibold text-gray-900' : 'text-gray-500'}`}>Route</span>
               </div>
@@ -317,7 +317,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               {/* Step 2 */}
               <div className="flex flex-col items-center flex-1">
                 <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all ${currentStep >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
-                  {currentStep > 2 ? <Check className="w-4 h-4" /> : '2'}
+                  2
                 </div>
                 <span className={`text-xs mt-1.5 ${currentStep >= 2 ? 'font-semibold text-gray-900' : 'text-gray-500'}`}>Vehicle</span>
               </div>
@@ -465,8 +465,8 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
 
       {/* STEP 2 & 3 - Fullscreen Modal */}
       {(currentStep === 2 || currentStep === 3) && isMounted && createPortal(
-        <div className="booking-modal-overlay fixed inset-0 bg-black/50 z-[9999] flex items-start justify-center overflow-y-auto animate-fadeIn">
-          <div className="min-h-screen w-full bg-white md:m-4 md:rounded-2xl md:shadow-2xl md:max-w-6xl animate-slideUp">
+        <div className="booking-modal-overlay fixed inset-0 bg-white md:bg-black/70 z-[9999] flex items-start justify-center overflow-y-auto animate-fadeIn">
+          <div className="min-h-full h-auto w-full bg-white md:min-h-screen md:m-4 md:rounded-2xl md:shadow-2xl md:max-w-6xl animate-slideUp">
             {/* Close button */}
             <div className="sticky top-0 bg-white z-10 border-b border-gray-200 px-4 md:px-8 py-4 flex items-center justify-between md:rounded-t-2xl">
               <h2 className="text-xl md:text-2xl font-bold text-gray-900">
@@ -486,7 +486,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             </div>
 
             {/* Progress bar - Custom Stepper */}
-            <div className="px-4 md:px-8 py-4 border-b border-gray-200">
+            <div className="px-4 md:px-8 py-4 border-b border-gray-200 bg-white">
               <div className="flex items-center justify-between max-w-md mx-auto">
                 {/* Step 1 */}
                 <div className="flex flex-col items-center flex-1">
@@ -521,7 +521,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             </div>
 
             {/* Content */}
-            <div className="px-4 md:px-8 py-6 md:py-8 pb-12">
+            <div className="px-4 md:px-8 py-6 md:py-8 pb-20 md:pb-12 min-h-[calc(100vh-180px)]">
               <div className="max-w-4xl mx-auto">
               {/* STEP 2: Promo code + vehicle selection */}
               {currentStep === 2 && (
@@ -640,23 +640,23 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
           </div>
 
           {/* Navigation */}
-          <div className="flex gap-4">
+          <div className="flex gap-4 sticky bottom-0 bg-white pt-4 pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:static border-t border-gray-200 md:border-0 mt-6">
             <button
               type="button"
               onClick={() => {
                 saveToLocalStorage();
                 setCurrentStep(1);
               }}
-              className="flex-1 bg-gray-200 text-gray-700 font-semibold py-4 px-6 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2"
+              className="flex-1 bg-gray-200 text-gray-700 font-semibold py-4 px-6 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2 min-h-[48px]"
             >
               <ArrowLeft className="w-5 h-5" />
               Back
             </button>
             <button
               type="submit"
-              className="flex-1 bg-blue-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+              className="flex-1 bg-blue-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl min-h-[48px]"
             >
-              Continue to Payment
+              Payment
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
@@ -815,7 +815,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
               <button
                 type="button"
                 onClick={() => step3Form.setValue('paymentMethod', 'online')}
-                className={`p-6 border-2 rounded-xl transition-all text-left ${
+                className={`relative p-6 border-2 rounded-xl transition-all text-left ${
                   paymentMethod === 'online'
                     ? 'border-blue-600 bg-blue-50'
                     : 'border-gray-200 hover:border-gray-300'
@@ -873,14 +873,14 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
           </div>
 
           {/* Navigation */}
-          <div className="flex gap-4">
+          <div className="flex gap-4 sticky bottom-0 bg-white pt-4 pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:static border-t border-gray-200 md:border-0 mt-6">
             <button
               type="button"
               onClick={() => {
                 saveToLocalStorage();
                 setCurrentStep(2);
               }}
-              className="flex-1 bg-gray-200 text-gray-700 font-semibold py-4 px-6 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2"
+              className="flex-1 bg-gray-200 text-gray-700 font-semibold py-4 px-6 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2 min-h-[48px]"
             >
               <ArrowLeft className="w-5 h-5" />
               Back
@@ -888,14 +888,14 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             <button
               type="submit"
               disabled={step3Form.formState.isSubmitting}
-              className="flex-1 bg-green-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50"
+              className="flex-1 bg-green-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 min-h-[48px]"
             >
-              {step3Form.formState.isSubmitting ? 'Processing...' : 'Confirm Booking'}
+              {step3Form.formState.isSubmitting ? 'Processing...' : 'Confirm'}
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
 
-          <p className="text-sm text-gray-500 text-center">
+          <p className="text-sm text-gray-500 text-center pb-4">
             Free cancellation up to 24h before transfer
           </p>
         </form>
