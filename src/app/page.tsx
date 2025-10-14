@@ -77,49 +77,49 @@ export default function Home() {
       <PopularToursSection />
 
       {/* Features Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Us?
+          <div className="text-center mb-6">
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
+              Why Choose <span className="text-blue-600">Us?</span>
             </h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
               Professional service with attention to every detail
             </p>
           </div>
 
           {/* Feature Cards */}
-          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <Shield className="w-6 h-6 text-blue-600" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 max-w-5xl mx-auto">
+            <div className="bg-white rounded-lg shadow-md p-4 md:p-5 hover:shadow-lg transition-all duration-300 border border-gray-100">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                <Shield className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
               </div>
-              <h4 className="text-gray-900 font-semibold mb-2">Licensed & Insured</h4>
-              <p className="text-gray-600 text-sm">Professional drivers with full insurance</p>
+              <h4 className="text-gray-900 font-semibold text-sm md:text-base mb-1 md:mb-2">Licensed & Insured</h4>
+              <p className="text-gray-600 text-xs md:text-sm">Professional drivers with full insurance</p>
             </div>
             
-            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <Clock className="w-6 h-6 text-blue-600" />
+            <div className="bg-white rounded-lg shadow-md p-4 md:p-5 hover:shadow-lg transition-all duration-300 border border-gray-100">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                <Clock className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
               </div>
-              <h4 className="text-gray-900 font-semibold mb-2">Door-to-Door</h4>
-              <p className="text-gray-600 text-sm">Pick up from any address in Kraków</p>
+              <h4 className="text-gray-900 font-semibold text-sm md:text-base mb-1 md:mb-2">Door-to-Door</h4>
+              <p className="text-gray-600 text-xs md:text-sm">Pick up from any address in Kraków</p>
             </div>
             
-            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <Star className="w-6 h-6 text-blue-600" />
+            <div className="bg-white rounded-lg shadow-md p-4 md:p-5 hover:shadow-lg transition-all duration-300 border border-gray-100">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                <Star className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
               </div>
-              <h4 className="text-gray-900 font-semibold mb-2">Fixed Prices</h4>
-              <p className="text-gray-600 text-sm">No hidden costs or surprises</p>
+              <h4 className="text-gray-900 font-semibold text-sm md:text-base mb-1 md:mb-2">Fixed Prices</h4>
+              <p className="text-gray-600 text-xs md:text-sm">No hidden costs or surprises</p>
             </div>
             
-            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <Plane className="w-6 h-6 text-blue-600" />
+            <div className="bg-white rounded-lg shadow-md p-4 md:p-5 hover:shadow-lg transition-all duration-300 border border-gray-100">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                <Plane className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
               </div>
-              <h4 className="text-gray-900 font-semibold mb-2">Airport Transfer</h4>
-              <p className="text-gray-600 text-sm">Kraków Airport to any destination</p>
+              <h4 className="text-gray-900 font-semibold text-sm md:text-base mb-1 md:mb-2">Airport Transfer</h4>
+              <p className="text-gray-600 text-xs md:text-sm">Kraków Airport to any destination</p>
             </div>
           </div>
         </div>
