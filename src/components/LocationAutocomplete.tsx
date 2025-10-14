@@ -272,15 +272,15 @@ export default function LocationAutocomplete({
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-full">
       {label && (
         <label className="block text-sm font-medium text-gray-700 mb-2">
           {label}
         </label>
       )}
       
-      <div className="relative">
-        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
+      <div className="relative w-full">
+        <MapPin className="absolute left-3 top-3 sm:top-3.5 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none z-10" />
         <input
           type="text"
           value={value}
@@ -292,21 +292,20 @@ export default function LocationAutocomplete({
             }
           }}
           placeholder={placeholder}
-          className="w-full pl-11 pr-10 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white"
+          className="w-full pl-9 sm:pl-11 pr-8 sm:pr-10 py-3 sm:py-3.5 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white text-sm sm:text-base"
           style={{ 
             fontSize: '16px',
             WebkitAppearance: 'none',
-            appearance: 'none',
-            minHeight: '48px'
+            appearance: 'none'
           }}
         />
         {isLoading && (
-          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-blue-600 animate-spin" />
+          <Loader2 className="absolute right-3 top-3 sm:top-3.5 w-4 h-4 sm:w-5 sm:h-5 text-blue-600 animate-spin" />
         )}
       </div>
 
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto left-0 right-0">
           {suggestions.map((suggestion) => {
             const addr = formatAddress(suggestion);
             const isCustom = suggestion.isCustom;
@@ -345,18 +344,19 @@ export default function LocationAutocomplete({
               <button
                 key={suggestion.place_id}
                 onClick={() => handleSelectSuggestion(suggestion)}
-                className={`w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors border-b border-gray-100 last:border-0 ${
+                type="button"
+                className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors border-b border-gray-100 last:border-0 ${
                   isCustom ? 'bg-blue-50/50' : ''
                 }`}
               >
-                <div className="flex items-start gap-3">
-                  <IconComponent className={`w-4 h-4 ${iconColor} mt-1 flex-shrink-0`} />
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <IconComponent className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${iconColor} mt-0.5 sm:mt-1 flex-shrink-0`} />
                   <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-semibold ${isCustom ? 'text-blue-900' : 'text-gray-900'}`}>
+                    <p className={`text-xs sm:text-sm font-semibold truncate ${isCustom ? 'text-blue-900' : 'text-gray-900'}`}>
                       {addr.main}
                     </p>
                     {addr.details && (
-                      <p className="text-xs text-gray-500 mt-0.5">
+                      <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5 truncate">
                         {addr.details}
                       </p>
                     )}

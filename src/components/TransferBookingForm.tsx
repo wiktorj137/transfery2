@@ -53,7 +53,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
   } = useBookingForm({ defaultDestination });
 
   return (
-    <>
+    <div className="w-full max-w-full overflow-hidden">
       {/* STEP 1: Route Selection (Inline) */}
       {currentStep === 1 && (
         <div className="w-full bg-transparent">
@@ -64,7 +64,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
           />
 
           {/* Step 1 Form */}
-          <form onSubmit={handleStep1Submit} className="space-y-3 sm:space-y-4">
+          <form onSubmit={handleStep1Submit} className="space-y-3 sm:space-y-4 w-full">
             <BookingStep1
               form={step1Form}
               onPickupChange={(address, coords) => {
@@ -80,7 +80,7 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white font-bold py-3 sm:py-3.5 px-6 rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl text-base sm:text-lg min-h-[48px]"
+              className="w-full bg-blue-600 text-white font-bold py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl text-base sm:text-lg min-h-[48px]"
             >
               <span>Continue</span>
               <ArrowRight className="w-5 h-5" />
@@ -174,6 +174,6 @@ export default function TransferBookingForm({ defaultDestination }: TransferBook
           )}
         </BookingModal>
       )}
-    </>
+    </div>
   );
 }

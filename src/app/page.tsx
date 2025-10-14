@@ -57,8 +57,8 @@ export default function Home() {
             </div>
 
             {/* Right Column - Booking Form */}
-            <div className="lg:pl-8 mb-8 lg:mb-12" id="booking-form">
-              <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8">
+            <div className="lg:pl-8 mb-8 lg:mb-12 w-full" id="booking-form">
+              <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 overflow-hidden w-full">
                 <TransferBookingForm />
               </div>
             </div>
