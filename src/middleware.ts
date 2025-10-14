@@ -54,13 +54,13 @@ export async function middleware(request: NextRequest) {
   
   const headers = {
     // Content Security Policy
-    // Note: Development mode requires 'unsafe-inline' and 'unsafe-eval' for HMR and React DevTools
-    // Production uses stricter policy
+    // Note: Next.js 15 requires 'unsafe-inline' for production inline scripts or nonce support
+    // We're using 'unsafe-inline' as a fallback for Next.js generated scripts
     'Content-Security-Policy': [
       "default-src 'self'",
       isDevelopment
         ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://va.vercel-scripts.com"
-        : "script-src 'self' https://va.vercel-scripts.com",
+        : "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
       "style-src 'self' 'unsafe-inline'", // Required for Tailwind
       "img-src 'self' data: https: blob:",
       "font-src 'self' data:",
