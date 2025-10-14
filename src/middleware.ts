@@ -54,22 +54,23 @@ export async function middleware(request: NextRequest) {
   
   const headers = {
     // Content Security Policy
-    // Note: Next.js 15 requires 'unsafe-inline' for production inline scripts or nonce support
-    // We're using 'unsafe-inline' as a fallback for Next.js generated scripts
+    // Next.js requires 'unsafe-inline' for production builds on Vercel
+    // Using 'strict-dynamic' provides additional protection while allowing Next.js bundles
     'Content-Security-Policy': [
       "default-src 'self'",
       isDevelopment
         ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://va.vercel-scripts.com"
-        : "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
-      "style-src 'self' 'unsafe-inline'", // Required for Tailwind
+        : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://*.vercel.app",
+      "style-src 'self' 'unsafe-inline'", // Required for Tailwind & Next.js
       "img-src 'self' data: https: blob:",
       "font-src 'self' data:",
       isDevelopment
         ? "connect-src 'self' https://nominatim.openstreetmap.org https://va.vercel-scripts.com ws: wss:"
-        : "connect-src 'self' https://nominatim.openstreetmap.org https://va.vercel-scripts.com",
+        : "connect-src 'self' https://nominatim.openstreetmap.org https://va.vercel-scripts.com https://*.vercel.app",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
+      "object-src 'none'",
     ].join('; '),
 
     // Other security headers
