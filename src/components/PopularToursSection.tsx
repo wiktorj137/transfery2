@@ -105,12 +105,19 @@ export function PopularToursSection() {
 
         {/* CTA */}
         <div className="text-center">
-          <Link
-            href="#destinations"
+          <button
+            onClick={() => {
+              const destinationsElement = document.getElementById('destinations');
+              if (destinationsElement) {
+                const yOffset = -100;
+                const y = destinationsElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+              }
+            }}
             className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
           >
             <span>View Popular Destinations</span>
-          </Link>
+          </button>
         </div>
       </div>
     </section>

@@ -42,22 +42,46 @@ export default function Home() {
           }}></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-32 xl:pb-40">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start lg:items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-8 lg:pt-16 pb-12 sm:pb-16 lg:pb-32 xl:pb-40">
+          <div className="grid lg:grid-cols-2 gap-4 lg:gap-12 items-start lg:items-center">
             {/* Left Column - Hero Content */}
             <div className="text-white text-center lg:text-left">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-                Airport Transfers
-                <span className="block text-blue-200 mt-2">Krakow</span>
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full mb-3 sm:mb-4 border border-white/20">
+                <Plane className="w-3.5 h-3.5 text-blue-200" />
+                <span className="text-xs sm:text-sm font-medium text-blue-100">Premium Airport Service</span>
+              </div>
+              
+              <h2 className="text-2xl sm:text-4xl lg:text-6xl xl:text-7xl font-extrabold mb-3 sm:mb-4 lg:mb-6 leading-tight">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white">
+                  Airport Transfers
+                </span>
+                <span className="block text-blue-200 mt-1 sm:mt-2 text-3xl sm:text-5xl lg:text-6xl">Kraków</span>
               </h2>
               
-              <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0">
-                Professional transport to and from the airport. Comfortable, safe, on time.
+              <p className="text-sm sm:text-lg lg:text-xl text-blue-100 mb-4 sm:mb-6 lg:mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                Professional transport to and from the airport. 
+                <span className="block mt-1 sm:mt-2 font-semibold text-white text-xs sm:text-base">Comfortable • Safe • On Time</span>
               </p>
+
+              {/* Quick Benefits - Hidden on mobile */}
+              <div className="hidden sm:grid grid-cols-3 gap-3 sm:gap-4 max-w-lg mx-auto lg:mx-0 mb-6">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20">
+                  <Shield className="w-6 h-6 text-blue-200 mb-2 mx-auto lg:mx-0" />
+                  <p className="text-xs sm:text-sm font-semibold">Licensed</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20">
+                  <Clock className="w-6 h-6 text-blue-200 mb-2 mx-auto lg:mx-0" />
+                  <p className="text-xs sm:text-sm font-semibold">24/7 Service</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20">
+                  <Star className="w-6 h-6 text-blue-200 mb-2 mx-auto lg:mx-0" />
+                  <p className="text-xs sm:text-sm font-semibold">Fixed Prices</p>
+                </div>
+              </div>
             </div>
 
             {/* Right Column - Booking Form */}
-            <div className="lg:pl-8 mb-8 lg:mb-12 w-full" id="booking-form">
+            <div className="lg:pl-8 w-full" id="booking-form">
               <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 overflow-hidden w-full">
                 <TransferBookingForm />
               </div>
@@ -355,40 +379,33 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* CTA Section - Improved Design */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl shadow-2xl border border-blue-500 mt-12">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10">
-              <div className="absolute inset-0" style={{
-                backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-                backgroundSize: '40px 40px'
-              }}></div>
-            </div>
-            
-            {/* Decorative circles */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
-            
-            <div className="relative max-w-3xl mx-auto p-8 md:p-12 text-center">
-              <div className="mb-8">
-                <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-white/30">
-                  <span className="text-5xl">🗺️</span>
-                </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                  Can&apos;t Find Your Destination?
+          {/* CTA Section - Professional Design */}
+          <div className="relative overflow-hidden bg-gradient-to-r from-slate-50 to-blue-50 rounded-2xl shadow-lg border border-gray-200 mt-12">
+            <div className="relative max-w-4xl mx-auto px-6 py-10 md:py-14">
+              <div className="text-center">
+                <h3 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Custom Transfer to Any Location in Poland
                 </h3>
-                <p className="text-lg md:text-xl text-blue-100 mb-6 leading-relaxed">
-                  We offer private transfers to anywhere in Poland.
-                </p>
                 
+                <p className="text-base md:text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                  Professional door-to-door service with fixed prices and experienced drivers
+                </p>
+
                 {/* CTA Button */}
-                <a 
-                  href="#booking-form" 
-                  className="inline-flex items-center gap-3 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
+                <button 
+                  onClick={() => {
+                    const formElement = document.getElementById('booking-form');
+                    if (formElement) {
+                      const yOffset = -100; // offset dla headera
+                      const y = formElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                      window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
+                  }}
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
-                  <span className="text-lg">Book Your Custom Transfer</span>
+                  <span>Get a Quote</span>
                   <ArrowRight className="w-5 h-5" />
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -452,54 +469,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer - Enhanced Design */}
-      <footer className="bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+      {/* Footer - Modern Clean Design */}
+      <footer className="bg-white border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
             {/* Company Info */}
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
-                  <Plane className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                  <Plane className="w-5 h-5 text-white" />
                 </div>
-                <h4 className="font-bold text-xl">Krakow Transfer</h4>
+                <h4 className="font-bold text-lg text-gray-900">Krakow Transfer</h4>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                Professional airport and city transfers in Poland. Available 24/7 with premium vehicles and licensed drivers.
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                Professional airport and city transfers in Poland. Available 24/7.
               </p>
               <div className="flex items-center gap-2">
-                <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                <span className="text-sm text-gray-300">4.9/5 from 500+ reviews</span>
+                <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                <span className="text-xs text-gray-700 font-medium">4.9/5 • 500+ reviews</span>
               </div>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-bold text-lg mb-4">Popular Destinations</h4>
-              <ul className="space-y-2">
+              <h4 className="font-semibold text-sm text-gray-900 mb-4">Popular Routes</h4>
+              <ul className="space-y-2.5">
                 <li>
-                  <Link href="/book/auschwitz-birkenau" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  <Link href="/book/auschwitz-birkenau" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">
                     Auschwitz-Birkenau
                   </Link>
                 </li>
                 <li>
-                  <Link href="/book/wieliczka-salt-mine" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  <Link href="/book/wieliczka-salt-mine" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">
                     Wieliczka Salt Mine
                   </Link>
                 </li>
                 <li>
-                  <Link href="/book/zakopane" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  <Link href="/book/zakopane" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">
                     Zakopane Mountains
                   </Link>
                 </li>
                 <li>
-                  <Link href="/book/krakow" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Kraków Airport Transfer
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/book/warsaw" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Warsaw Airport Transfer
+                  <Link href="/book/krakow" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">
+                    Kraków Airport
                   </Link>
                 </li>
               </ul>
@@ -507,76 +519,57 @@ export default function Home() {
 
             {/* Contact */}
             <div>
-              <h4 className="font-bold text-lg mb-4">Contact Us</h4>
+              <h4 className="font-semibold text-sm text-gray-900 mb-4">Contact</h4>
               <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <span className="text-blue-400">📞</span>
-                  <div>
-                    <p className="text-sm text-gray-300 font-medium">Phone (24/7)</p>
-                    <a href="tel:+48123456789" className="text-gray-400 hover:text-white transition-colors text-sm">
-                      +48 123 456 789
-                    </a>
-                  </div>
+                <li>
+                  <p className="text-xs text-gray-500 mb-0.5">Phone (24/7)</p>
+                  <a href="tel:+48123456789" className="text-sm text-gray-900 hover:text-blue-600 transition-colors font-medium">
+                    +48 123 456 789
+                  </a>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-blue-400">📧</span>
-                  <div>
-                    <p className="text-sm text-gray-300 font-medium">Email</p>
-                    <a href="mailto:contact@transfer.pl" className="text-gray-400 hover:text-white transition-colors text-sm">
-                      contact@transfer.pl
-                    </a>
-                  </div>
+                <li>
+                  <p className="text-xs text-gray-500 mb-0.5">Email</p>
+                  <a href="mailto:contact@transfer.pl" className="text-sm text-gray-900 hover:text-blue-600 transition-colors font-medium">
+                    contact@transfer.pl
+                  </a>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-blue-400">📍</span>
-                  <div>
-                    <p className="text-sm text-gray-300 font-medium">Service Area</p>
-                    <p className="text-gray-400 text-sm">Kraków & All Poland</p>
-                  </div>
+                <li>
+                  <p className="text-xs text-gray-500 mb-0.5">Service Area</p>
+                  <p className="text-sm text-gray-900 font-medium">Kraków & All Poland</p>
                 </li>
               </ul>
             </div>
 
             {/* Airports */}
             <div>
-              <h4 className="font-bold text-lg mb-4">Airport Transfers</h4>
-              <ul className="space-y-3">
-                <li>
-                  <div className="bg-gray-800 rounded-lg p-3 hover:bg-gray-750 transition-colors">
-                    <p className="text-white font-medium text-sm mb-1">Kraków Airport (KRK)</p>
-                    <p className="text-gray-400 text-xs">Balice, 20 km from city</p>
-                  </div>
+              <h4 className="font-semibold text-sm text-gray-900 mb-4">Main Airports</h4>
+              <ul className="space-y-2">
+                <li className="bg-gray-50 rounded-lg p-3 border border-gray-100">
+                  <p className="text-sm text-gray-900 font-medium mb-0.5">Kraków (KRK)</p>
+                  <p className="text-xs text-gray-500">20 km from city center</p>
                 </li>
-                <li>
-                  <div className="bg-gray-800 rounded-lg p-3 hover:bg-gray-750 transition-colors">
-                    <p className="text-white font-medium text-sm mb-1">Katowice Airport (KTW)</p>
-                    <p className="text-gray-400 text-xs">Pyrzowice, 80 km from Kraków</p>
-                  </div>
-                </li>
-                <li>
-                  <div className="bg-gray-800 rounded-lg p-3 hover:bg-gray-750 transition-colors">
-                    <p className="text-white font-medium text-sm mb-1">Warsaw Airport (WAW)</p>
-                    <p className="text-gray-400 text-xs">Chopin Airport, Warsaw</p>
-                  </div>
+                <li className="bg-gray-50 rounded-lg p-3 border border-gray-100">
+                  <p className="text-sm text-gray-900 font-medium mb-0.5">Katowice (KTW)</p>
+                  <p className="text-xs text-gray-500">80 km from Kraków</p>
                 </li>
               </ul>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-gray-800 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-gray-400 text-sm text-center md:text-left">
-                © 2024 Krakow Transfer. All rights reserved.
+          <div className="border-t border-gray-200 pt-6">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+              <p className="text-gray-500 text-xs text-center sm:text-left">
+                © 2025 Krakow Transfer. All rights reserved.
               </p>
               <div className="flex flex-wrap justify-center gap-6">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                <a href="#" className="text-xs text-gray-500 hover:text-blue-600 transition-colors">
                   Privacy Policy
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                <a href="#" className="text-xs text-gray-500 hover:text-blue-600 transition-colors">
                   Terms of Service
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                <a href="#" className="text-xs text-gray-500 hover:text-blue-600 transition-colors">
                   Cancellation Policy
                 </a>
               </div>
