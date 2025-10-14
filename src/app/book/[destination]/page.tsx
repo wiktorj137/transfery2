@@ -147,6 +147,41 @@ const destinations = {
     ],
     coordinates: { lat: 49.4142, lng: 20.4167 }
   },
+  'energylandia': {
+    name: 'Energylandia Amusement Park',
+    shortName: 'Energylandia',
+    location: 'Zator, Poland',
+    distance: '60 km',
+    duration: '1h',
+    price: 180,
+    image: '/images/Energylandia.jpg',
+    description: 'Visit the largest amusement park in Poland and one of the biggest in Europe! Energylandia offers over 120 attractions including record-breaking roller coasters, family rides, water park, and entertainment for all ages.',
+    highlights: [
+      'Largest amusement park in Poland',
+      'Over 120 attractions and rides',
+      'Hyperion - Europe\'s fastest roller coaster',
+      'Zadra - world\'s tallest hybrid coaster',
+      'Water park with tropical zone',
+      'Dragon Zone for families'
+    ],
+    whatToExpect: [
+      'Record-breaking roller coasters',
+      'Family-friendly attractions',
+      'Water rides and splash zones',
+      'Shows and entertainment',
+      'Restaurants and food courts',
+      'Full day of unlimited fun'
+    ],
+    tips: [
+      'Buy tickets online for discounts',
+      'Arrive early to avoid queues',
+      'Best season: May to September',
+      'Bring swimwear for water attractions',
+      'Comfortable shoes are essential',
+      'Fast track passes available for popular rides'
+    ],
+    coordinates: { lat: 49.9833, lng: 19.4333 }
+  },
   'ojcow-national-park': {
     name: 'Ojców National Park',
     shortName: 'Ojców Park',

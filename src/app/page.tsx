@@ -2,6 +2,7 @@
 
 import { Plane, Shield, Clock, Star, ArrowRight, Phone } from 'lucide-react';
 import TransferBookingForm from '@/components/TransferBookingForm';
+import { PopularToursSection } from '@/components/PopularToursSection';
 import Link from 'next/link';
 
 export default function Home() {
@@ -72,22 +73,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Organized Tours Section */}
-      <section id="destinations" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+      {/* Popular Tours - Right Below Form */}
+      <PopularToursSection />
+
+      {/* Features Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 bg-blue-100 text-blue-700 px-4 py-2 rounded-full mb-4">
-              <Star className="w-4 h-4 fill-blue-700" />
-              <span className="text-sm font-semibold uppercase tracking-wide">Organized Tours</span>
-            </div>
-            
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Explore Top Attractions from <span className="text-blue-600">Kraków</span>
+          <div className="text-center mb-12">
+            <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Why Choose Us?
             </h3>
-            
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              We organize comfortable transfers and tours to the most popular destinations around Kraków. 
-              Visit Auschwitz, Wieliczka Salt Mine, Zakopane mountains, and more.
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Professional service with attention to every detail
             </p>
           </div>
 
@@ -132,31 +129,28 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Popular Destinations from Kraków
+              Popular Destinations from <span className="text-blue-600">Kraków</span>
             </h2>
             <p className="text-base text-gray-600 max-w-2xl mx-auto">
-              Book your transfer to top attractions
+              Comfortable transfers with professional guides to top attractions
             </p>
           </div>
 
-          {/* All Destinations - Compact Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+          {/* All Destinations - Clean uniform grid */}
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-4 md:gap-6 mb-8">
             {/* Auschwitz-Birkenau */}
             <Link href="/book/auschwitz-birkenau" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/Auschwitz-Birkenau.jpg" 
-                    alt="Auschwitz-Birkenau"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Auschwitz-Birkenau</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/Auschwitz-Birkenau.jpg" 
+                  alt="Auschwitz-Birkenau"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">150 PLN</span>
-                    <span className="text-xs text-gray-500">70 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Auschwitz-Birkenau</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 150 zł</p>
                   </div>
                 </div>
               </div>
@@ -164,20 +158,17 @@ export default function Home() {
 
             {/* Wieliczka Salt Mine */}
             <Link href="/book/wieliczka-salt-mine" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/wieliczka-salt-mine.jpg" 
-                    alt="Wieliczka Salt Mine"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Wieliczka Salt Mine</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/wieliczka-salt-mine.jpg" 
+                  alt="Wieliczka Salt Mine"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">100 PLN</span>
-                    <span className="text-xs text-gray-500">15 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Wieliczka Salt Mine</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 100 zł</p>
                   </div>
                 </div>
               </div>
@@ -185,41 +176,17 @@ export default function Home() {
 
             {/* Zakopane & Tatra Mountains */}
             <Link href="/book/zakopane" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/zakopane-tatry.jpg" 
-                    alt="Zakopane"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Zakopane & Tatras</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/zakopane-tatry.jpg" 
+                  alt="Zakopane"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">350 PLN</span>
-                    <span className="text-xs text-gray-500">110 km</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* Dunajec River Rafting */}
-            <Link href="/book/dunajec-rafting" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/dunajec-river.jpg" 
-                    alt="Dunajec River"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Dunajec River Rafting</h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">280 PLN</span>
-                    <span className="text-xs text-gray-500">100 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Zakopane & Tatras</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 350 zł</p>
                   </div>
                 </div>
               </div>
@@ -227,20 +194,53 @@ export default function Home() {
 
             {/* Ojców National Park */}
             <Link href="/book/ojcow-national-park" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/ojcow-park.jpg" 
-                    alt="Ojców National Park"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Ojców National Park</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/ojcow-park.jpg" 
+                  alt="Ojców National Park"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">120 PLN</span>
-                    <span className="text-xs text-gray-500">30 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Ojców National Park</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 120 zł</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Dunajec River Rafting */}
+            <Link href="/book/dunajec-rafting" className="group">
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/dunajec-river.jpg" 
+                  alt="Dunajec River"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-bold text-white text-base md:text-lg">Dunajec River Rafting</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 280 zł</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Energylandia Amusement Park */}
+            <Link href="/book/energylandia" className="group">
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/Energylandia.jpg" 
+                  alt="Energylandia"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-bold text-white text-base md:text-lg">Energylandia</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 180 zł</p>
                   </div>
                 </div>
               </div>
@@ -248,20 +248,17 @@ export default function Home() {
 
             {/* Częstochowa - Jasna Góra */}
             <Link href="/book/czestochowa" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/czestochowa.jpg" 
-                    alt="Częstochowa"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Częstochowa</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/czestochowa.jpg" 
+                  alt="Częstochowa"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">280 PLN</span>
-                    <span className="text-xs text-gray-500">130 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Częstochowa</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 280 zł</p>
                   </div>
                 </div>
               </div>
@@ -269,20 +266,17 @@ export default function Home() {
 
             {/* Wadowice */}
             <Link href="/book/wadowice" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/wadowice.jpg" 
-                    alt="Wadowice"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Wadowice</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/wadowice.jpg" 
+                  alt="Wadowice"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">140 PLN</span>
-                    <span className="text-xs text-gray-500">50 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Wadowice</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 140 zł</p>
                   </div>
                 </div>
               </div>
@@ -290,20 +284,17 @@ export default function Home() {
 
             {/* Kraków City Center */}
             <Link href="/book/krakow" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/Krakow.jpg" 
-                    alt="Kraków"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Kraków City Center</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/Krakow.jpg" 
+                  alt="Kraków"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">80 PLN</span>
-                    <span className="text-xs text-gray-500">20 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Kraków City Center</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 80 zł</p>
                   </div>
                 </div>
               </div>
@@ -311,20 +302,17 @@ export default function Home() {
 
             {/* Katowice */}
             <Link href="/book/katowice" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/Katowice.jpg" 
-                    alt="Katowice"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Katowice</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/Katowice.jpg" 
+                  alt="Katowice"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">200 PLN</span>
-                    <span className="text-xs text-gray-500">80 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Katowice</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 200 zł</p>
                   </div>
                 </div>
               </div>
@@ -332,20 +320,17 @@ export default function Home() {
 
             {/* Warsaw */}
             <Link href="/book/warsaw" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/Warsaw.jpg" 
-                    alt="Warsaw"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Warsaw</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/Warsaw.jpg" 
+                  alt="Warsaw"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">600 PLN</span>
-                    <span className="text-xs text-gray-500">300 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Warsaw</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 600 zł</p>
                   </div>
                 </div>
               </div>
@@ -353,20 +338,17 @@ export default function Home() {
 
             {/* Wrocław */}
             <Link href="/book/wroclaw" className="group">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
-                <div className="relative h-32 overflow-hidden">
-                  <img 
-                    src="/images/Wroclaw.jpg" 
-                    alt="Wrocław"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Wrocław</h3>
+              <div className="relative h-64 md:h-72 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <img 
+                  src="/images/Wroclaw.jpg" 
+                  alt="Wrocław"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-r from-black/40 via-black/30 to-black/20 backdrop-blur-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-600 font-bold text-lg">550 PLN</span>
-                    <span className="text-xs text-gray-500">270 km</span>
+                    <h3 className="font-bold text-white text-base md:text-lg">Wrocław</h3>
+                    <p className="text-blue-200 font-semibold text-base md:text-lg">from 550 zł</p>
                   </div>
                 </div>
               </div>

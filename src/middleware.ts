@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { RateLimiterMemory } from 'rate-limiter-flexible';
+import { generateCsrfToken, validateCsrfToken, extractCsrfToken } from '@/lib/csrf';
 
 // Rate limiter configuration
 const rateLimiter = new RateLimiterMemory({
@@ -49,15 +50,23 @@ export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
   // Security Headers (Production-grade)
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  
   const headers = {
     // Content Security Policy
+    // Note: Development mode requires 'unsafe-inline' and 'unsafe-eval' for HMR and React DevTools
+    // Production uses stricter policy
     'Content-Security-Policy': [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://va.vercel-scripts.com",
-      "style-src 'self' 'unsafe-inline'",
+      isDevelopment
+        ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://va.vercel-scripts.com"
+        : "script-src 'self' https://va.vercel-scripts.com",
+      "style-src 'self' 'unsafe-inline'", // Required for Tailwind
       "img-src 'self' data: https: blob:",
       "font-src 'self' data:",
-      "connect-src 'self' https://nominatim.openstreetmap.org https://va.vercel-scripts.com",
+      isDevelopment
+        ? "connect-src 'self' https://nominatim.openstreetmap.org https://va.vercel-scripts.com ws: wss:"
+        : "connect-src 'self' https://nominatim.openstreetmap.org https://va.vercel-scripts.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
@@ -78,16 +87,37 @@ export async function middleware(request: NextRequest) {
     response.headers.set(key, value);
   });
 
-  // CSRF Token (for form submissions)
-  if (request.method === 'POST' && pathname.startsWith('/api/')) {
-    const csrfToken = request.headers.get('x-csrf-token');
-    const cookieCsrfToken = request.cookies.get('csrf-token')?.value;
-
-    if (!csrfToken || csrfToken !== cookieCsrfToken) {
-      return new NextResponse('Invalid CSRF Token', { status: 403 });
+  // CSRF Protection for state-changing operations
+  const isStateChanging = ['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method);
+  const isApiRoute = pathname.startsWith('/api/');
+  
+  if (isStateChanging && isApiRoute) {
+    // Validate CSRF token for API routes
+    const csrfToken = extractCsrfToken(request);
+    
+    const isValid = await validateCsrfToken(csrfToken);
+    if (!isValid) {
+      return new NextResponse('Invalid CSRF token', {
+        status: 403,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     }
   }
-
+  
+  // Generate and set CSRF token for GET requests
+  if (request.method === 'GET' && !pathname.startsWith('/_next/')) {
+    const csrfToken = await generateCsrfToken();
+    response.cookies.set('csrf-token', csrfToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/',
+    });
+    response.headers.set('X-CSRF-Token', csrfToken);
+  }
+  
   return response;
 }
 

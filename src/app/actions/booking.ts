@@ -41,8 +41,6 @@ export async function submitBookingAction(
     // 4. Process payment (if online)
     // 5. Generate booking confirmation PDF
 
-    console.log('✅ Booking created:', booking.id);
-
     return {
       success: true,
       data: booking,
@@ -74,7 +72,6 @@ export async function getBookingAction(
   try {
     // In production: Fetch from database
     // For now: Return mock data
-    console.log('Fetching booking:', bookingId);
     
     return {
       success: false,
@@ -103,8 +100,6 @@ export async function cancelBookingAction(
     // 3. Process refund if applicable
     // 4. Update status
     // 5. Notify driver and customer
-
-    console.log('🚫 Booking cancelled:', bookingId, reason);
 
     return { success: true };
   } catch {

@@ -26,14 +26,14 @@ export const StepIndicator = memo(function StepIndicator({
 }: StepIndicatorProps) {
   return (
     <div className="w-full mb-8">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-center">
         {steps.map((step, index) => {
           const isCompleted = currentStep > step.number;
           const isCurrent = currentStep === step.number;
           const isLast = index === steps.length - 1;
 
           return (
-            <div key={step.number} className="flex items-center flex-1">
+            <div key={step.number} className="flex items-center">
               {/* Step Circle */}
               <div className="flex flex-col items-center">
                 <div
@@ -73,7 +73,7 @@ export const StepIndicator = memo(function StepIndicator({
               {!isLast && (
                 <div
                   className={cn(
-                    'flex-1 h-1 mx-2 rounded-full transition-all duration-500',
+                    'w-24 h-1 mx-4 rounded-full transition-all duration-500',
                     isCompleted ? 'bg-green-500' : 'bg-gray-200'
                   )}
                 />

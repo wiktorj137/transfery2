@@ -4,11 +4,13 @@ import type { BookingData, VehicleType, PaymentMethod } from '@/types';
 
 interface BookingStore extends Partial<BookingData> {
   currentStep: number;
+  _hasHydrated: boolean;
   
   // Actions
   setStep: (step: number) => void;
   nextStep: () => void;
   prevStep: () => void;
+  setHasHydrated: (state: boolean) => void;
   
   // Step 1
   setPickup: (address: string, coords?: { lat: number; lng: number }) => void;
@@ -46,6 +48,10 @@ export const useBookingStore = create<BookingStore>()(
   persist(
     (set, get) => ({
       ...initialState,
+      _hasHydrated: false,
+      
+      // Hydration
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
       
       // Step management
       setStep: (step) => set({ currentStep: step }),
@@ -96,7 +102,18 @@ export const useBookingStore = create<BookingStore>()(
     }),
     {
       name: 'booking-storage',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => {
+        // SSR-safe: Only use localStorage in browser environment
+        if (typeof window !== 'undefined') {
+          return localStorage;
+        }
+        // Fallback for SSR - no persistence
+        return {
+          getItem: () => null,
+          setItem: () => {},
+          removeItem: () => {},
+        };
+      }),
       partialize: (state) => ({
         // Only persist booking data, not actions
         pickup: state.pickup,
@@ -114,10 +131,27 @@ export const useBookingStore = create<BookingStore>()(
       }),
       // Custom serialization/deserialization for Date objects
       onRehydrateStorage: () => (state) => {
-        if (state && state.date && typeof state.date === 'string') {
-          state.date = new Date(state.date);
+        if (state) {
+          // Convert date strings back to Date objects
+          if (state.date && typeof state.date === 'string') {
+            state.date = new Date(state.date);
+          }
+          // Mark store as hydrated
+          state.setHasHydrated(true);
         }
       },
     }
   )
 );
+
+/**
+ * Hook to check if store has been hydrated from localStorage
+ * Use this to prevent hydration mismatches in SSR
+ * 
+ * @example
+ * const hasHydrated = useHasHydrated();
+ * if (!hasHydrated) return <Skeleton />;
+ */
+export const useHasHydrated = () => {
+  return useBookingStore((state) => state._hasHydrated);
+};

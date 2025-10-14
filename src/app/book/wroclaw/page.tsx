@@ -1,301 +1,243 @@
-import { Metadata } from 'next';
-import { Clock, Shield, Star, MapPin, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import TransferBookingForm from '@/components/TransferBookingForm';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Transfer from Kraków to Wrocław | Krakow Transfer',
-  description: 'Book private transfer from Kraków to Wrocław. Fixed price 550 PLN, 270 km, 3 hours. Comfortable journey to the Venice of Poland.',
-  keywords: 'Kraków Wrocław transfer, private taxi Kraków Wrocław, transport to Wrocław, Lower Silesia transfer',
+import { useRouter } from 'next/navigation';
+import { ArrowLeft, MapPin, Clock, Star, CheckCircle } from 'lucide-react';
+import TransferBookingForm from '@/components/TransferBookingForm';
+import { useEffect } from 'react';
+
+const wroclawDestination = {
+  name: 'Wrocław - Venice of Poland',
+  shortName: 'Wrocław',
+  location: 'Wrocław, Poland',
+  distance: '270 km',
+  duration: '3h',
+  price: 550,
+  image: '/images/Wroclaw.jpg',
+  description: 'Discover the enchanting capital of Lower Silesia, known as the "Venice of Poland" for its 12 islands and over 100 bridges. Experience colorful market squares, charming dwarfs scattered throughout the city, and vibrant student atmosphere.',
+  highlights: [
+    'UNESCO-listed Centennial Hall',
+    'Colorful Market Square with Gothic Town Hall',
+    'Over 400 dwarf sculptures hidden in the city',
+    'Ostrów Tumski - Cathedral Island',
+    'Vibrant student city atmosphere',
+    'Beautiful Oder River boulevards'
+  ],
+  whatToExpect: [
+    'Walk through the stunning Market Square',
+    'Hunt for hidden dwarf sculptures',
+    'Explore Gothic Cathedral Island',
+    'Visit the magnificent Centennial Hall',
+    'Stroll along Oder River bridges',
+    'Experience vibrant cafes and restaurants'
+  ],
+  tips: [
+    'Download dwarf hunting map for fun activity',
+    'Market Square is perfect for evening strolls',
+    'Cathedral Island best at sunset',
+    'Try traditional Lower Silesian cuisine',
+    'Student discounts widely available',
+    'Centennial Hall has beautiful gardens'
+  ],
+  coordinates: { lat: 51.1079, lng: 17.0385 }
 };
 
 export default function WroclawTransferPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const prefillData = {
+      pickup: 'Kraków City Center',
+      dropoff: wroclawDestination.name,
+      dropoffCoords: wroclawDestination.coordinates
+    };
+    localStorage.setItem('booking_prefill', JSON.stringify(prefillData));
+  }, []);
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <ArrowLeft className="w-5 h-5 text-blue-600" />
-              <span className="text-sm font-semibold text-gray-700">Back to Home</span>
-            </Link>
-            <div className="text-sm text-gray-600">
-              📞 +48 123 456 789
+    <main className="min-h-screen bg-gray-50">
+      <header className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <button
+            onClick={() => router.push('/')}
+            className="group flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-all duration-200 font-medium"
+          >
+            <div className="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
+              <ArrowLeft className="w-4 h-4" />
             </div>
-          </div>
+            <span>Back to Destinations</span>
+          </button>
         </div>
       </header>
 
-      <section className="pt-12 pb-8 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-blue-100 px-4 py-2 rounded-full mb-4">
-                <MapPin className="w-4 h-4 text-blue-600" />
-                <span className="text-sm font-semibold text-blue-600">Long Distance Transfer</span>
+      <section className="relative h-[500px] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-transparent z-10"></div>
+        <div className="absolute inset-0">
+          <img
+            src={wroclawDestination.image}
+            alt={wroclawDestination.name}
+            className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-700"
+          />
+        </div>
+        <div className="absolute inset-0 z-20 flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="max-w-3xl">
+              <div className="mb-4">
+                <span className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-sm font-medium border border-white/30">
+                  Popular Destination
+                </span>
               </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Transfer from Kraków to Wrocław
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+                {wroclawDestination.name}
               </h1>
-              
-              <p className="text-xl text-gray-600 mb-6">
-                Premium transfer service from Kraków to Wrocław, the beautiful &quot;Venice of Poland&quot;. 
-                Discover Lower Silesia&apos;s capital in comfort and style.
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
-                  <p className="text-sm text-gray-600 mb-1">Distance</p>
-                  <p className="text-2xl font-bold text-gray-900">270 km</p>
+              <div className="flex flex-wrap gap-3">
+                <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-xl px-4 py-3 flex items-center gap-2 shadow-lg">
+                  <MapPin className="w-5 h-5 text-white" />
+                  <span className="text-white font-medium">{wroclawDestination.location}</span>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
-                  <p className="text-sm text-gray-600 mb-1">Duration</p>
-                  <p className="text-2xl font-bold text-gray-900">3 hours</p>
+                <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-xl px-4 py-3 flex items-center gap-2 shadow-lg">
+                  <Clock className="w-5 h-5 text-white" />
+                  <span className="text-white font-medium">{wroclawDestination.distance} • {wroclawDestination.duration}</span>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
-                  <p className="text-sm text-gray-600 mb-1">Fixed Price</p>
-                  <p className="text-2xl font-bold text-blue-600">550 PLN</p>
-                </div>
-                <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
-                  <p className="text-sm text-gray-600 mb-1">Availability</p>
-                  <p className="text-2xl font-bold text-gray-900">24/7</p>
+                <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl px-4 py-3 flex items-center gap-2 shadow-lg">
+                  <Star className="w-5 h-5 text-white fill-white" />
+                  <span className="text-white font-bold">From {wroclawDestination.price} PLN</span>
                 </div>
               </div>
-
-              <div className="flex flex-wrap gap-4">
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Shield className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium">Fully Insured</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Star className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium">Premium Vehicles</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Clock className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium">Advance Booking</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src="/images/Wroclaw.jpg" 
-                alt="Wrocław - Market Square"
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="pb-12 px-3 sm:px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8">
-            <TransferBookingForm defaultDestination="Wrocław" />
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">About This Transfer</h2>
-            <p className="text-gray-600 text-lg">Everything you need to know</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* Left Column */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-xl">🌉</span>
+      <section className="py-16 px-3 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-6">
+              <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 border border-gray-100">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-900">About This Destination</h2>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">To Venice of Poland</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  {wroclawDestination.description}
+                </p>
               </div>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                We offer comfortable transfer service from Kraków to Wrocław, one of Poland&apos;s most beautiful cities. Known as the &quot;Venice of Poland&quot; 
-                for its numerous bridges and islands. Please book in advance to reserve your transfer.
-              </p>
 
-              <div className="space-y-4">
-                <h4 className="font-semibold text-gray-900 text-lg mb-3">Service Features</h4>
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-sm p-8 border border-blue-100">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                  <Star className="w-6 h-6 text-yellow-500 fill-yellow-500" />
+                  Highlights
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {wroclawDestination.highlights.map((highlight, index) => (
+                    <div 
+                      key={index} 
+                      className="flex items-start gap-3 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <CheckCircle className="w-4 h-4 text-green-600" />
+                      </div>
+                      <span className="text-gray-700 font-medium">{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 border border-gray-100">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">What to Expect</h3>
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                  {wroclawDestination.whatToExpect.map((item, index) => (
+                    <div key={index} className="flex items-start gap-3 group">
+                      <div className="w-8 h-8 rounded-lg bg-blue-100 group-hover:bg-blue-500 flex items-center justify-center flex-shrink-0 transition-colors">
+                        <span className="text-blue-600 group-hover:text-white font-bold transition-colors">
+                          {index + 1}
+                        </span>
+                      </div>
+                      <span className="text-gray-700 pt-1">{item}</span>
                     </div>
-                    <span className="text-gray-700">Comfortable vehicles for long-distance travel</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-sm p-8 border border-amber-200">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                  💡 Practical Tips
+                </h3>
+                <div className="space-y-3">
+                  {wroclawDestination.tips.map((tip, index) => (
+                    <div key={index} className="flex items-start gap-3 bg-white rounded-xl p-4 shadow-sm">
+                      <span className="text-2xl">✓</span>
+                      <span className="text-gray-700 pt-0.5">{tip}</span>
                     </div>
-                    <span className="text-gray-700">Experienced drivers familiar with A4 highway route</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-xl p-8 text-white overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
+                <div className="relative z-10">
+                  <h3 className="text-3xl font-bold mb-2">Why Book With Us?</h3>
+                  <p className="text-blue-100 mb-8">Experience hassle-free travel with our premium service</p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:bg-white/20 transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6" />
+                      </div>
+                      <p className="font-bold text-lg mb-1">Fixed Price Guarantee</p>
+                      <p className="text-blue-100 text-sm">No hidden fees or surprises at checkout</p>
                     </div>
-                    <span className="text-gray-700">Refreshments provided</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:bg-white/20 transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6" />
+                      </div>
+                      <p className="font-bold text-lg mb-1">Professional Drivers</p>
+                      <p className="text-blue-100 text-sm">Licensed, experienced, English-speaking</p>
                     </div>
-                    <span className="text-gray-700">Air conditioning for year-round comfort</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:bg-white/20 transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6" />
+                      </div>
+                      <p className="font-bold text-lg mb-1">Door-to-Door Service</p>
+                      <p className="text-blue-100 text-sm">Pick up and drop off at any address</p>
                     </div>
-                    <span className="text-gray-700">Optional rest stops for longer journeys</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:bg-white/20 transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6" />
+                      </div>
+                      <p className="font-bold text-lg mb-1">Free Cancellation</p>
+                      <p className="text-blue-100 text-sm">Cancel up to 24h before your transfer</p>
                     </div>
-                    <span className="text-gray-700">All tolls and fees included in the price</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Clock className="w-3 h-3 text-blue-600" />
-                    </div>
-                    <span className="text-gray-700 font-medium">Please book at least 48 hours in advance</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-xl">📍</span>
+            <div className="lg:col-span-1">
+              <div className="sticky top-24">
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-200">
+                  <div className="p-4 sm:p-6">
+                    <TransferBookingForm />
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Popular Destinations</h3>
-              </div>
-              
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Wrocław Airport (WRO/Copernicus)</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Market Square (Rynek) and Old Town</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Ostrów Tumski (Cathedral Island)</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Centennial Hall (UNESCO)</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Wrocław Main Railway Station</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Hotels and business centers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Why Visit Wrocław */}
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg p-8 border border-purple-100">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
-                <span className="text-xl">🏛️</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900">Why Visit Wrocław?</h3>
-            </div>
-            <p className="text-gray-700 mb-6 leading-relaxed">
-              Wrocław is one of Poland&apos;s hidden gems, offering unforgettable experiences:
-            </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-purple-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Historic Architecture</h4>
-                  <p className="text-sm text-gray-600">Stunning Gothic and Baroque buildings</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-purple-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">100+ Bridges</h4>
-                  <p className="text-sm text-gray-600">Connecting islands and riverbanks</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-purple-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Famous Dwarfs</h4>
-                  <p className="text-sm text-gray-600">Bronze dwarfs scattered throughout city</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-purple-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Cultural Scene</h4>
-                  <p className="text-sm text-gray-600">Vibrant nightlife and events</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-purple-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">European Capital</h4>
-                  <p className="text-sm text-gray-600">Of Culture 2016</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-purple-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Perfect Getaway</h4>
-                  <p className="text-sm text-gray-600">Ideal for planned weekend breaks</p>
+                <div className="mt-6 bg-gray-50 rounded-xl p-6 border border-gray-200">
+                  <div className="flex items-center justify-center gap-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span>Secure Payment</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span>Instant Confirmation</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400 text-sm">
-            © 2024 Krakow Transfer. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }

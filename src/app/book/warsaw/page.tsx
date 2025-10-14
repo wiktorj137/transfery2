@@ -1,301 +1,243 @@
-import { Metadata } from 'next';
-import { Clock, Shield, Star, MapPin, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import TransferBookingForm from '@/components/TransferBookingForm';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Transfer from Kraków to Warsaw | Krakow Transfer',
-  description: 'Book private transfer from Kraków to Warsaw. Fixed price 650 PLN, 300 km, 3 hours. Comfortable direct journey to Poland\'s capital.',
-  keywords: 'Kraków Warsaw transfer, private taxi Kraków Warsaw, transport to Warsaw, Poland transfer service',
+import { useRouter } from 'next/navigation';
+import { ArrowLeft, MapPin, Clock, Star, CheckCircle } from 'lucide-react';
+import TransferBookingForm from '@/components/TransferBookingForm';
+import { useEffect } from 'react';
+
+const warsawDestination = {
+  name: 'Warsaw - Capital of Poland',
+  shortName: 'Warsaw',
+  location: 'Warsaw, Poland',
+  distance: '300 km',
+  duration: '3h',
+  price: 650,
+  image: '/images/Warsaw.jpg',
+  description: 'Experience Poland\'s vibrant capital city, a phoenix risen from the ashes of WWII. Warsaw combines modern skyscrapers with meticulously reconstructed Old Town, world-class museums, and a thriving cultural scene.',
+  highlights: [
+    'UNESCO World Heritage reconstructed Old Town',
+    'Royal Castle and Lazienki Palace',
+    'Warsaw Uprising Museum',
+    'Palace of Culture and Science panoramic views',
+    'Vistula River boulevards and parks',
+    'Vibrant nightlife and culinary scene'
+  ],
+  whatToExpect: [
+    'Explore the beautifully rebuilt Old Town Square',
+    'Visit the Royal Castle and King\'s residence',
+    'Walk through Lazienki Park with Palace on Water',
+    'Learn Polish history at world-class museums',
+    'Enjoy panoramic views from observation decks',
+    'Experience modern shopping and entertainment'
+  ],
+  tips: [
+    'Best to spend 2-3 days to see main attractions',
+    'Public transport is excellent and affordable',
+    'Try traditional Polish cuisine in Old Town',
+    'Warsaw Uprising Museum requires 3-4 hours',
+    'Free walking tours available daily',
+    'River cruises operate April to October'
+  ],
+  coordinates: { lat: 52.2297, lng: 21.0122 }
 };
 
 export default function WarsawTransferPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const prefillData = {
+      pickup: 'Kraków City Center',
+      dropoff: warsawDestination.name,
+      dropoffCoords: warsawDestination.coordinates
+    };
+    localStorage.setItem('booking_prefill', JSON.stringify(prefillData));
+  }, []);
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <ArrowLeft className="w-5 h-5 text-blue-600" />
-              <span className="text-sm font-semibold text-gray-700">Back to Home</span>
-            </Link>
-            <div className="text-sm text-gray-600">
-              📞 +48 123 456 789
+    <main className="min-h-screen bg-gray-50">
+      <header className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <button
+            onClick={() => router.push('/')}
+            className="group flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-all duration-200 font-medium"
+          >
+            <div className="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
+              <ArrowLeft className="w-4 h-4" />
             </div>
-          </div>
+            <span>Back to Destinations</span>
+          </button>
         </div>
       </header>
 
-      <section className="pt-12 pb-8 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-blue-100 px-4 py-2 rounded-full mb-4">
-                <MapPin className="w-4 h-4 text-blue-600" />
-                <span className="text-sm font-semibold text-blue-600">Long Distance Transfer</span>
+      <section className="relative h-[500px] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-transparent z-10"></div>
+        <div className="absolute inset-0">
+          <img
+            src={warsawDestination.image}
+            alt={warsawDestination.name}
+            className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-700"
+          />
+        </div>
+        <div className="absolute inset-0 z-20 flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="max-w-3xl">
+              <div className="mb-4">
+                <span className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-sm font-medium border border-white/30">
+                  Popular Destination
+                </span>
               </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Transfer from Kraków to Warsaw
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+                {warsawDestination.name}
               </h1>
-              
-              <p className="text-xl text-gray-600 mb-6">
-                Premium long-distance transfer service from Kraków to Warsaw, Poland&apos;s capital. 
-                Travel in comfort on the A4 highway with professional drivers.
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
-                  <p className="text-sm text-gray-600 mb-1">Distance</p>
-                  <p className="text-2xl font-bold text-gray-900">300 km</p>
+              <div className="flex flex-wrap gap-3">
+                <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-xl px-4 py-3 flex items-center gap-2 shadow-lg">
+                  <MapPin className="w-5 h-5 text-white" />
+                  <span className="text-white font-medium">{warsawDestination.location}</span>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
-                  <p className="text-sm text-gray-600 mb-1">Duration</p>
-                  <p className="text-2xl font-bold text-gray-900">3 hours</p>
+                <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-xl px-4 py-3 flex items-center gap-2 shadow-lg">
+                  <Clock className="w-5 h-5 text-white" />
+                  <span className="text-white font-medium">{warsawDestination.distance} • {warsawDestination.duration}</span>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
-                  <p className="text-sm text-gray-600 mb-1">Fixed Price</p>
-                  <p className="text-2xl font-bold text-blue-600">650 PLN</p>
-                </div>
-                <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
-                  <p className="text-sm text-gray-600 mb-1">Availability</p>
-                  <p className="text-2xl font-bold text-gray-900">24/7</p>
+                <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl px-4 py-3 flex items-center gap-2 shadow-lg">
+                  <Star className="w-5 h-5 text-white fill-white" />
+                  <span className="text-white font-bold">From {warsawDestination.price} PLN</span>
                 </div>
               </div>
-
-              <div className="flex flex-wrap gap-4">
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Shield className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium">Fully Insured</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Star className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium">Premium Vehicles</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Clock className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium">Advance Booking</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src="/images/Warsaw.jpg" 
-                alt="Warsaw - Palace of Culture and Science"
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="pb-12 px-3 sm:px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8">
-            <TransferBookingForm defaultDestination="Warsaw" />
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">About This Transfer</h2>
-            <p className="text-gray-600 text-lg">Everything you need to know</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* Left Column */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-xl">🛣️</span>
+      <section className="py-16 px-3 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-6">
+              <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 border border-gray-100">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-900">About This Destination</h2>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Long-Distance Transfer</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  {warsawDestination.description}
+                </p>
               </div>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                We offer comfortable long-distance transfer service from Kraków to Warsaw, covering 300 km in approximately 3 hours via the A4 and A1 highways. 
-                Perfect for planned trips to the capital. Please book in advance to ensure availability.
-              </p>
 
-              <div className="space-y-4">
-                <h4 className="font-semibold text-gray-900 text-lg mb-3">Service Features</h4>
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-sm p-8 border border-blue-100">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                  <Star className="w-6 h-6 text-yellow-500 fill-yellow-500" />
+                  Highlights
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {warsawDestination.highlights.map((highlight, index) => (
+                    <div 
+                      key={index} 
+                      className="flex items-start gap-3 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <CheckCircle className="w-4 h-4 text-green-600" />
+                      </div>
+                      <span className="text-gray-700 font-medium">{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 border border-gray-100">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">What to Expect</h3>
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                  {warsawDestination.whatToExpect.map((item, index) => (
+                    <div key={index} className="flex items-start gap-3 group">
+                      <div className="w-8 h-8 rounded-lg bg-blue-100 group-hover:bg-blue-500 flex items-center justify-center flex-shrink-0 transition-colors">
+                        <span className="text-blue-600 group-hover:text-white font-bold transition-colors">
+                          {index + 1}
+                        </span>
+                      </div>
+                      <span className="text-gray-700 pt-1">{item}</span>
                     </div>
-                    <span className="text-gray-700">Comfortable vehicles ideal for long journeys</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-sm p-8 border border-amber-200">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                  💡 Practical Tips
+                </h3>
+                <div className="space-y-3">
+                  {warsawDestination.tips.map((tip, index) => (
+                    <div key={index} className="flex items-start gap-3 bg-white rounded-xl p-4 shadow-sm">
+                      <span className="text-2xl">✓</span>
+                      <span className="text-gray-700 pt-0.5">{tip}</span>
                     </div>
-                    <span className="text-gray-700">Professional drivers with excellent route knowledge</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-xl p-8 text-white overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
+                <div className="relative z-10">
+                  <h3 className="text-3xl font-bold mb-2">Why Book With Us?</h3>
+                  <p className="text-blue-100 mb-8">Experience hassle-free travel with our premium service</p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:bg-white/20 transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6" />
+                      </div>
+                      <p className="font-bold text-lg mb-1">Fixed Price Guarantee</p>
+                      <p className="text-blue-100 text-sm">No hidden fees or surprises at checkout</p>
                     </div>
-                    <span className="text-gray-700">Bottled water provided</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:bg-white/20 transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6" />
+                      </div>
+                      <p className="font-bold text-lg mb-1">Professional Drivers</p>
+                      <p className="text-blue-100 text-sm">Licensed, experienced, English-speaking</p>
                     </div>
-                    <span className="text-gray-700">Air conditioning and climate control</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:bg-white/20 transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6" />
+                      </div>
+                      <p className="font-bold text-lg mb-1">Door-to-Door Service</p>
+                      <p className="text-blue-100 text-sm">Pick up and drop off at any address</p>
                     </div>
-                    <span className="text-gray-700">Rest stop included if needed</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                      </svg>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:bg-white/20 transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6" />
+                      </div>
+                      <p className="font-bold text-lg mb-1">Free Cancellation</p>
+                      <p className="text-blue-100 text-sm">Cancel up to 24h before your transfer</p>
                     </div>
-                    <span className="text-gray-700">All highway tolls included in price</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Clock className="w-3 h-3 text-blue-600" />
-                    </div>
-                    <span className="text-gray-700 font-medium">Please book at least 48 hours in advance</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-xl">📍</span>
+            <div className="lg:col-span-1">
+              <div className="sticky top-24">
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-200">
+                  <div className="p-4 sm:p-6">
+                    <TransferBookingForm />
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Popular Destinations</h3>
-              </div>
-              
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Warsaw Chopin Airport (WAW)</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Warsaw Old Town (Stare Miasto)</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">City Center and business district</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Royal Castle and Royal Route</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Warsaw Central Railway Station</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                  <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-700">Hotels and conference centers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Why Choose Private Transfer */}
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-lg p-8 border border-blue-100">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-xl">💡</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900">Why Choose Private Transfer?</h3>
-            </div>
-            <p className="text-gray-700 mb-6 leading-relaxed">
-              While train connections between Kraków and Warsaw are available, private transfer offers additional convenience:
-            </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-blue-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Door-to-Door Service</h4>
-                  <p className="text-sm text-gray-600">No need to get to/from railway stations</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-blue-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Flexible Timing</h4>
-                  <p className="text-sm text-gray-600">Plan according to your schedule</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-blue-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">No Luggage Hassles</h4>
-                  <p className="text-sm text-gray-600">No restrictions or handling worries</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-blue-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Privacy & Comfort</h4>
-                  <p className="text-sm text-gray-600">Travel at your own pace</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-blue-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Multiple Stops</h4>
-                  <p className="text-sm text-gray-600">Possible along the route (arrange in advance)</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-white/70 p-4 rounded-lg">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-blue-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Perfect for Groups</h4>
-                  <p className="text-sm text-gray-600">Ideal for 2-4 passengers</p>
+                <div className="mt-6 bg-gray-50 rounded-xl p-6 border border-gray-200">
+                  <div className="flex items-center justify-center gap-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span>Secure Payment</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span>Instant Confirmation</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400 text-sm">
-            © 2024 Krakow Transfer. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }
