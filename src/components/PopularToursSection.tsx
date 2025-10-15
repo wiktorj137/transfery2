@@ -20,30 +20,30 @@ const TOURS: Tour[] = [
   {
     id: '1',
     name: 'Auschwitz-Birkenau',
-    price: 350,
+    price: 150,
     image: '/images/Auschwitz-Birkenau.jpg',
     href: '/book/auschwitz-birkenau',
   },
   {
     id: '2',
     name: 'Wieliczka Salt Mine',
-    price: 280,
+    price: 100,
     image: '/images/wieliczka-salt-mine.jpg',
     href: '/book/wieliczka-salt-mine',
   },
   {
     id: '3',
-    name: 'Zakopane Mountains',
-    price: 420,
+    name: 'Zakopane & Tatras',
+    price: 350,
     image: '/images/zakopane-tatry.jpg',
     href: '/book/zakopane',
   },
   {
     id: '4',
-    name: 'Warsaw City Tour',
-    price: 650,
-    image: '/images/Warsaw.jpg',
-    href: '/book/warsaw',
+    name: 'Energylandia',
+    price: 180,
+    image: '/images/Energylandia.jpg',
+    href: '/book/energylandia',
   },
 ];
 
